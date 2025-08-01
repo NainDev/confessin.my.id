@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confessin - Blog Komunitas Pesan Anonim</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'pastel-pink': '#FADADD',
+                        'coral-red': '#E95A6B',
+                        'pink-light': '#ffe0e0',
+                        'pink-dark': '#c4485a'
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom, #FADADD 0%, #ffffff 100%);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #E95A6B 0%, #c4485a 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(233, 90, 107, 0.25);
+        }
+        
+        .floating-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            animation: float 3s ease-in-out infinite;
+            cursor: pointer;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .hero-pattern {
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.2) 2px, transparent 2px),
+                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        .hero-bg {
+            background: linear-gradient(135deg, #E95A6B 0%, #c4485a 100%);
+        }
+
+        .clickable {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .clickable:hover {
+            transform: scale(1.05);
+        }
+
+        .clickable:active {
+            transform: scale(0.95);
+        }
+
+        .pulse-animation {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        .featured-gradient {
+            background: linear-gradient(135deg, #E95A6B 0%, #FF6B8A 50%, #c4485a 100%);
+        }
+
+        .category-badge {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .blog-card {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .trending-indicator {
+            animation: trend-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes trend-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .scroll-indicator {
+            animation: scroll-bounce 2s infinite;
+        }
+
+        @keyframes scroll-bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="gradient-bg shadow-xl sticky top-0 z-50 backdrop-blur-md">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center space-x-4">
+                    <div class="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all clickable">
+                        <i class="fas fa-shield-alt text-coral-red text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-white font-bold text-2xl drop-shadow-lg">Confessin</h1>
+                        <p class="text-pink-light text-sm font-medium">Blog & Komunitas</p>
+                    </div>
+                </div>
+                
+                <!-- Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="text-white hover:text-pink-light transition-all duration-300 font-medium relative group">
+                        Beranda
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-pink-light transition-all group-hover:w-full"></span>
+                    </a>
+                    <a href="#articles" class="text-white hover:text-pink-light transition-all duration-300 font-medium relative group">
+                        Artikel
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-pink-light transition-all group-hover:w-full"></span>
+                    </a>
+                    <a href="#" class="text-white hover:text-pink-light transition-all duration-300 font-medium relative group">
+                        Privasi
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-pink-light transition-all group-hover:w-full"></span>
+                    </a>
+                    <a href="#" class="text-white hover:text-pink-light transition-all duration-300 font-medium relative group">
+                        Bantuan
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-pink-light transition-all group-hover:w-full"></span>
+                    </a>
+                    <button class="bg-white text-coral-red px-6 py-2 rounded-full font-semibold hover:bg-pink-light transition-all shadow-lg hover:shadow-xl clickable">
+                        <i class="fas fa-pencil-alt mr-2"></i>Tulis
+                    </button>
+                </nav>
+                
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-white p-2">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-bg hero-pattern py-20 text-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-transparent"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-4xl mx-auto">
+                <span class="inline-block bg-white/20 text-white px-4 py-2 rounded-full text-sm font-semibold mb-6 backdrop-blur-sm">
+                    <i class="fas fa-sparkles mr-2"></i>Platform Pesan Anonim Terpercaya
+                </span>
+                <h2 class="text-5xl md:text-6xl font-bold text-white mb-6 drop-shadow-2xl leading-tight">
+                    Ruang Aman untuk
+                    <span class="text-pink-light">Berekspresi</span>
+                </h2>
+                <p class="text-white/90 text-xl mb-10 max-w-3xl mx-auto drop-shadow-lg leading-relaxed">
+                    Temukan artikel, panduan, dan wawasan tentang komunikasi anonim yang aman, privasi digital, dan membangun komunitas yang positif.
+                </p>
+                <div class="flex flex-wrap justify-center gap-6 mb-12">
+                    <div class="category-badge text-white px-6 py-3 rounded-full font-semibold shadow-xl">
+                        <i class="fas fa-shield-alt mr-2"></i>Privasi Terjamin
+                    </div>
+                    <div class="category-badge text-white px-6 py-3 rounded-full font-semibold shadow-xl pulse-animation">
+                        <i class="fas fa-users mr-2"></i>Komunitas 12K+
+                    </div>
+                    <div class="category-badge text-white px-6 py-3 rounded-full font-semibold shadow-xl">
+                        <i class="fas fa-lock mr-2"></i>100% Anonim
+                    </div>
+                </div>
+                <div class="scroll-indicator">
+                    <i class="fas fa-chevron-down text-white text-2xl animate-bounce"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Article -->
+    <section class="py-16 -mt-8 relative z-20">
+        <div class="container mx-auto px-4">
+            <div class="max-w-5xl mx-auto">
+                <div class="blog-card rounded-3xl overflow-hidden shadow-2xl">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1200&h=500&fit=crop" 
+                             alt="Privacy Policy" 
+                             class="w-full h-64 md:h-80 object-cover">
+                        <div class="absolute top-6 left-6">
+                            <span class="bg-coral-red text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
+                                <i class="fas fa-star mr-2"></i>Artikel Utama
+                            </span>
+                        </div>
+                        <div class="absolute top-6 right-6">
+                            <button class="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-coral-red hover:bg-coral-red hover:text-white transition-all clickable">
+                                <i class="fas fa-bookmark"></i>
+                            </button>
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/50 to-transparent p-6">
+                            <div class="flex items-center space-x-4 text-white">
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-8 h-8 bg-coral-red rounded-full flex items-center justify-center">
+                                        <i class="fas fa-user text-xs"></i>
+                                    </div>
+                                    <span class="text-sm font-medium">Tim Confessin</span>
+                                </div>
+                                <span class="text-sm opacity-90">•</span>
+                                <span class="text-sm">5 menit baca</span>
+                                <span class="text-sm opacity-90">•</span>
+                                <span class="text-sm">Feb 05, 2025</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="p-8 md:p-10">
+                        <h3 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4 leading-tight">
+                            Kebijakan Privasi & Aturan Penggunaan: Komitmen Confessin untuk Ruang Aman
+                        </h3>
+                        <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                            Sebagai platform yang mengedepankan anonimitas, kami percaya transparansi adalah kunci. Pelajari bagaimana kami menjaga privasi Anda dan membangun komunitas yang positif.
+                        </p>
+                        
+                        <div class="flex flex-wrap items-center justify-between gap-4">
+                            <div class="flex items-center space-x-6">
+                                <div class="flex items-center space-x-2">
+                                    <div class="flex text-yellow-400">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="text-gray-600 text-sm">5.0 (128)</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-eye text-gray-400"></i>
+                                    <span class="text-gray-600 text-sm">2.3k views</span>
+                                </div>
+                            </div>
+                            
+                            <button class="bg-coral-red text-white px-8 py-3 rounded-full font-semibold hover:bg-pink-dark transition-all shadow-lg hover:shadow-xl clickable">
+                                <i class="fas fa-arrow-right mr-2"></i>Baca Selengkapnya
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Articles Grid -->
+    <section id="articles" class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h3 class="text-4xl font-bold text-gray-800 mb-4">Artikel Terbaru</h3>
+                <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+                    Jelajahi panduan lengkap tentang privasi digital, keamanan data, dan tips membangun komunitas yang sehat
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Article Card 1 -->
+                <article class="blog-card rounded-2xl overflow-hidden shadow-lg card-hover">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&h=250&fit=crop" 
+                             alt="Security" class="w-full h-48 object-cover">
+                        <div class="absolute top-4 left-4">
+                            <span class="trending-indicator bg-green-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                                <i class="fas fa-fire mr-1"></i>Trending
+                            </span>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <button class="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center text-coral-red hover:bg-coral-red hover:text-white transition-all clickable">
+                                <i class="fas fa-heart text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-lg text-xs font-semibold">Keamanan</span>
+                            <span class="text-gray-500 text-sm">3 min read</span>
+                        </div>
+                        <h4 class="font-bold text-xl mb-3 text-gray-800 leading-tight">Teknologi Enkripsi End-to-End: Melindungi Pesan Anonim Anda</h4>
+                        <p class="text-gray-600 text-sm mb-4 leading-relaxed">Memahami bagaimana teknologi enkripsi canggih bekerja untuk menjaga kerahasiaan setiap pesan yang Anda kirim...</p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-6 h-6 bg-coral-red rounded-full flex items-center justify-center">
+                                    <i class="fas fa-user text-white text-xs"></i>
+                                </div>
+                                <span class="text-gray-600 text-sm">Tim Security</span>
+                            </div>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Article Card 2 -->
+                <article class="blog-card rounded-2xl overflow-hidden shadow-lg card-hover">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=250&fit=crop" 
+                             alt="Community" class="w-full h-48 object-cover">
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-purple-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                                <i class="fas fa-crown mr-1"></i>Premium
+                            </span>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <button class="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center text-coral-red hover:bg-coral-red hover:text-white transition-all clickable">
+                                <i class="fas fa-bookmark text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded-lg text-xs font-semibold">Komunitas</span>
+                            <span class="text-gray-500 text-sm">4 min read</span>
+                        </div>
+                        <h4 class="font-bold text-xl mb-3 text-gray-800 leading-tight">Membangun Komunitas Positif: Panduan Komunikasi Anonim yang Sehat</h4>
+                        <p class="text-gray-600 text-sm mb-4 leading-relaxed">Tips dan strategi untuk menciptakan interaksi yang konstruktif dalam lingkungan komunikasi anonim...</p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-6 h-6 bg-coral-red rounded-full flex items-center justify-center">
+                                    <i class="fas fa-user text-white text-xs"></i>
+                                </div>
+                                <span class="text-gray-600 text-sm">Community Team</span>
+                            </div>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Article Card 3 -->
+                <article class="blog-card rounded-2xl overflow-hidden shadow-lg card-hover">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=400&h=250&fit=crop" 
+                             alt="FAQ" class="w-full h-48 object-cover">
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-orange-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                                <i class="fas fa-question mr-1"></i>FAQ
+                            </span>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <button class="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center text-coral-red hover:bg-coral-red hover:text-white transition-all clickable">
+                                <i class="fas fa-share text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-lg text-xs font-semibold">Bantuan</span>
+                            <span class="text-gray-500 text-sm">2 min read</span>
+                        </div>
+                        <h4 class="font-bold text-xl mb-3 text-gray-800 leading-tight">Pertanyaan yang Sering Diajukan: Panduan Lengkap Confessin</h4>
+                        <p class="text-gray-600 text-sm mb-4 leading-relaxed">Kumpulan jawaban lengkap untuk pertanyaan umum seputar fitur, keamanan, dan cara penggunaan platform...</p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-6 h-6 bg-coral-red rounded-full flex items-center justify-center">
+                                    <i class="fas fa-user text-white text-xs"></i>
+                                </div>
+                                <span class="text-gray-600 text-sm">Support Team</span>
+                            </div>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article Card 4 -->
+                <article class="blog-card rounded-2xl overflow-hidden shadow-lg card-hover">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400&h=250&fit=crop" 
+                             alt="Privacy Tips" class="w-full h-48 object-cover">
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-indigo-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                                <i class="fas fa-lightbulb mr-1"></i>Tips
+                            </span>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <button class="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center text-coral-red hover:bg-coral-red hover:text-white transition-all clickable">
+                                <i class="fas fa-heart text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded-lg text-xs font-semibold">Privasi</span>
+                            <span class="text-gray-500 text-sm">6 min read</span>
+                        </div>
+                        <h4 class="font-bold text-xl mb-3 text-gray-800 leading-tight">10 Tips Melindungi Privasi Digital dalam Era Komunikasi Anonim</h4>
+                        <p class="text-gray-600 text-sm mb-4 leading-relaxed">Panduan praktis untuk menjaga keamanan data pribadi dan privasi digital saat berkomunikasi online...</p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-6 h-6 bg-coral-red rounded-full flex items-center justify-center">
+                                    <i class="fas fa-user text-white text-xs"></i>
+                                </div>
+                                <span class="text-gray-600 text-sm">Privacy Expert</span>
+                            </div>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="far fa-star text-sm"></i>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article Card 5 -->
+                <article class="blog-card rounded-2xl overflow-hidden shadow-lg card-hover">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=400&h=250&fit=crop" 
+                             alt="Mental Health" class="w-full h-48 object-cover">
+                        <div class="absolute top-4 left-4">
+                            <span class="trending-indicator bg-pink-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                                <i class="fas fa-heart mr-1"></i>Popular
+                            </span>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <button class="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center text-coral-red hover:bg-coral-red hover:text-white transition-all clickable">
+                                <i class="fas fa-bookmark text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="bg-pink-100 text-pink-800 px-2 py-1 rounded-lg text-xs font-semibold">Kesehatan Mental</span>
+                            <span class="text-gray-500 text-sm">7 min read</span>
+                        </div>
+                        <h4 class="font-bold text-xl mb-3 text-gray-800 leading-tight">Manfaat Ekspresif Komunikasi Anonim untuk Kesehatan Mental</h4>
+                        <p class="text-gray-600 text-sm mb-4 leading-relaxed">Bagaimana platform komunikasi anonim dapat membantu individu mengekspresikan diri dengan lebih bebas...</p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-6 h-6 bg-coral-red rounded-full flex items-center justify-center">
+                                    <i class="fas fa-user text-white text-xs"></i>
+                                </div>
+                                <span class="text-gray-600 text-sm">Dr. Mental Health</span>
+                            </div>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article Card 6 -->
+                <article class="blog-card rounded-2xl overflow-hidden shadow-lg card-hover">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=250&fit=crop" 
+                             alt="Platform Update" class="w-full h-48 object-cover">
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-red-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                                <i class="fas fa-rocket mr-1"></i>Update
+                            </span>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <button class="w-8 h-8 bg-white/90 rounded-full flex items-center justify-center text-coral-red hover:bg-coral-red hover:text-white transition-all clickable">
+                                <i class="fas fa-share text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="bg-red-100 text-red-800 px-2 py-1 rounded-lg text-xs font-semibold">Platform</span>
+                            <span class="text-gray-500 text-sm">5 min read</span>
+                        </div>
+                        <h4 class="font-bold text-xl mb-3 text-gray-800 leading-tight">Fitur Terbaru Confessin: AI Moderasi dan Enhanced Security</h4>
+                        <p class="text-gray-600 text-sm mb-4 leading-relaxed">Discover the latest updates including AI-powered content moderation and enhanced security features...</p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-6 h-6 bg-coral-red rounded-full flex items-center justify-center">
+                                    <i class="fas fa-user text-white text-xs"></i>
+                                </div>
+                                <span class="text-gray-600 text-sm">Product Team</span>
+                            </div>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="far fa-star text-sm"></i>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            
+            <!-- Load More Button -->
+            <div class="text-center mt-12">
+                <button class="bg-coral-red text-white px-8 py-4 rounded-full font-semibold hover:bg-pink-dark transition-all shadow-lg hover:shadow-xl clickable">
+                    <i class="fas fa-plus mr-2"></i>Muat Artikel Lainnya
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-16 bg-gradient-to-r from-coral-red to-pink-dark">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="mb-8">
+                    <h3 class="text-4xl font-bold text-white mb-4">Tetap Update dengan Confessin</h3>
+                    <p class="text-white/90 text-lg leading-relaxed">
+                        Dapatkan artikel terbaru, tips privasi digital, dan update fitur langsung ke email Anda
+                    </p>
+                </div>
+                
+                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-2xl">
+                    <div class="flex flex-col md:flex-row gap-4 max-w-lg mx-auto">
+                        <input type="email" 
+                               placeholder="Masukkan email Anda" 
+                               class="flex-1 px-6 py-4 rounded-full border-0 bg-white/90 backdrop-blur-sm placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-white/30 transition-all">
+                        <button class="bg-white text-coral-red px-8 py-4 rounded-full font-semibold hover:bg-pink-light transition-all shadow-lg clickable">
+                            <i class="fas fa-paper-plane mr-2"></i>Berlangganan
+                        </button>
+                    </div>
+                    <p class="text-white/80 text-sm mt-4">
+                        <i class="fas fa-shield-alt mr-1"></i>Kami menghargai privasi Anda. Email tidak akan dibagikan ke pihak ketiga.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <!-- Company Info -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="w-12 h-12 bg-coral-red rounded-full flex items-center justify-center">
+                            <i class="fas fa-shield-alt text-white text-lg"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-2xl font-bold">Confessin</h4>
+                            <p class="text-gray-400 text-sm">Blog & Komunitas</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 leading-relaxed mb-6 max-w-md">
+                        Platform komunikasi anonim yang mengutamakan privasi, keamanan, dan membangun komunitas yang positif untuk semua pengguna.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-coral-red transition-all clickable">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-coral-red transition-all clickable">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-coral-red transition-all clickable">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-coral-red transition-all clickable">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h5 class="font-semibold text-lg mb-4">Tautan Cepat</h5>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-300 hover:text-coral-red transition-all">Beranda</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-coral-red transition-all">Artikel</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-coral-red transition-all">Tentang Kami</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-coral-red transition-all">Kontak</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-coral-red transition-all">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Legal -->
+                <div>
+                    <h5 class="font-semibold text-lg mb-4">Legal & Bantuan</h5>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-300 hover:text-coral-red transition-all">Kebijakan Privasi</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-coral-red transition-all">Syarat Layanan</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-coral-red transition-all">Panduan Komunitas</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-coral-red transition-all">Pusat Bantuan</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-coral-red transition-all">Laporkan Masalah</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm">
+                        © 2025 Confessin. Semua hak dilindungi undang-undang.
+                    </p>
+                    <div class="flex items-center space-x-6 mt-4 md:mt-0">
+                        <span class="text-gray-400 text-sm">Dibuat dengan</span>
+                        <i class="fas fa-heart text-coral-red"></i>
+                        <span class="text-gray-400 text-sm">untuk komunitas</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button -->
+    <div class="floating-btn">
+        <button class="w-16 h-16 bg-coral-red text-white rounded-full shadow-2xl hover:bg-pink-dark transition-all flex items-center justify-center clickable">
+            <i class="fas fa-pencil-alt text-xl"></i>
+        </button>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add click animations
+        document.querySelectorAll('.clickable').forEach(element => {
+            element.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+
+        // Newsletter subscription
+        document.querySelector('button[type="button"]').addEventListener('click', function() {
+            const email = document.querySelector('input[type="email"]').value;
+            if (email) {
+                alert('Terima kasih! Anda akan segera menerima update terbaru dari Confessin.');
+                document.querySelector('input[type="email"]').value = '';
+            } else {
+                alert('Silakan masukkan email yang valid.');
+            }
+        });
+
+        // Floating button scroll behavior
+        window.addEventListener('scroll', function() {
+            const floatingBtn = document.querySelector('.floating-btn');
+            if (window.scrollY > 300) {
+                floatingBtn.style.opacity = '1';
+                floatingBtn.style.transform = 'translateY(0)';
+            } else {
+                floatingBtn.style.opacity = '0.7';
+                floatingBtn.style.transform = 'translateY(10px)';
+            }
+        });
+
+        // Card hover effects enhancement
+        document.querySelectorAll('.card-hover').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.zIndex = '10';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.zIndex = '1';
+            });
+        });
+    </script>
+</body>
+</html>
