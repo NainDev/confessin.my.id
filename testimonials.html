@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testimoni Confessin Bot - Pengalaman Pengguna</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="shortcut icon" href="https://files.catbox.moe/yw1vlz.jpg" type="image/x-icon" />
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'pastel-pink': '#FADADD',
+                        'coral-red': '#E95A6B',
+                        'pink-light': '#ffe0e0',
+                        'pink-dark': '#c4485a',
+                        'purple-primary': '#6366f1',
+                        'purple-secondary': '#8b5cf6',
+                        'blue-primary': '#3b82f6',
+                        'emerald-primary': '#10b981'
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #FADADD 0%, #ffffff 50%, #f8fafc 100%);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #E95A6B 0%, #c4485a 100%);
+        }
+        
+        .clickable {
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .clickable:hover {
+            transform: translateY(-2px);
+        }
+
+        .clickable:active {
+            transform: scale(0.95);
+        }
+
+        .testimoni-card {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .testimoni-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(233, 90, 107, 0.15);
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .star-filled {
+            color: #fbbf24;
+            text-shadow: 0 0 8px rgba(251, 191, 36, 0.3);
+        }
+
+        .star-empty {
+            color: #e5e7eb;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .animate-delay-1 { animation-delay: 0.1s; }
+        .animate-delay-2 { animation-delay: 0.2s; }
+        .animate-delay-3 { animation-delay: 0.3s; }
+        .animate-delay-4 { animation-delay: 0.4s; }
+        .animate-delay-5 { animation-delay: 0.5s; }
+        .animate-delay-6 { animation-delay: 0.6s; }
+
+        .pulse-glow {
+            box-shadow: 0 0 0 0 rgba(233, 90, 107, 0.4);
+            animation: pulse-shadow 2s infinite;
+        }
+
+        @keyframes pulse-shadow {
+            0% {
+                box-shadow: 0 0 0 0 rgba(233, 90, 107, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(233, 90, 107, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(233, 90, 107, 0);
+            }
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #E95A6B, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="gradient-bg shadow-xl sticky top-0 z-50 backdrop-blur-md">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center space-x-4">
+                    <div class="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all clickable pulse-glow">
+                        <i class="fas fa-robot text-coral-red text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-white font-bold text-2xl drop-shadow-lg">Confessin Bot</h1>
+                        <p class="text-pink-light text-sm font-medium">Testimoni Pengguna</p>
+                    </div>
+                </div>
+                
+                <!-- Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="text-white hover:text-pink-light transition-all duration-300 font-medium relative group">
+                        Beranda
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-pink-light transition-all group-hover:w-full"></span>
+                    </a>
+                    <a href="#testimoni" class="text-white hover:text-pink-light transition-all duration-300 font-medium relative group">
+                        Testimoni
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-pink-light transition-all group-hover:w-full"></span>
+                    </a>
+                    <button class="bg-white text-coral-red px-6 py-2 rounded-full font-semibold hover:bg-pink-light transition-all shadow-lg hover:shadow-xl clickable">
+                        <i class="fas fa-heart mr-2"></i>Testimoni
+                    </button>
+                </nav>
+                
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-white p-2 clickable">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="py-16 relative overflow-hidden">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl md:text-6xl font-bold gradient-text mb-6 fade-in-up">
+                Testimoni Pengguna
+            </h2>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto fade-in-up animate-delay-1">
+                Dengarkan pengalaman nyata dari pengguna yang telah merasakan manfaat Confessin Bot
+            </p>
+        </div>
+    </section>
+
+    <!-- Testimoni Section -->
+    <section id="testimoni" class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+
+
+
+
+
+
+
+                <!-- Testimoni 5 -->
+                <div class="testimoni-card rounded-3xl p-8 shadow-xl fade-in-up animate-delay-5 clickable">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">E</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-indigo-500 text-lg">Eyis</h4>
+                            <div class="flex space-x-1 mt-1">
+                                <i class="fas fa-star star-filled"></i>
+                                <i class="fas fa-star star-filled"></i>
+                                <i class="fas fa-star star-filled"></i>
+                                <i class="fas fa-star star-filled"></i>
+                                <i class="fas fa-star star-filled"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed">
+                        "thank u udah hadir dan jadi perantara chatku dan crush hahaha"
+                    </p>
+                    <div class="mt-6 text-sm text-gray-500">
+                        <i class="fas fa-calendar mr-2"></i>6 Agustus 2025
+                    </div>
+                </div>
+
+                <!-- Testimoni 6 -->
+                <div class="testimoni-card rounded-3xl p-8 shadow-xl fade-in-up animate-delay-6 clickable">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">F</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-orange-500 text-lg">Fa</h4>
+                            <div class="flex space-x-1 mt-1">
+                                <i class="fas fa-star star-filled"></i>
+                                <i class="fas fa-star star-filled"></i>
+                                <i class="fas fa-star star-filled"></i>
+                                <i class="fas fa-star star-filled"></i>
+                                <i class="fas fa-star star-filled"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed">
+                        "HEYYY, TRIMAKASIH BUAT JASA BOT CONFES NYA YYAAA! Sekarang aku balikan sama dia 😩😩"
+                    </p>
+                    <div class="mt-6 text-sm text-gray-500">
+                        <i class="fas fa-calendar mr-2"></i>1 Agustus 2025
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16 mt-16">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-4 mb-6">
+                    <div class="w-12 h-12 bg-coral-red rounded-full flex items-center justify-center pulse-glow">
+                        <i class="fas fa-robot text-white text-lg"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-2xl font-bold">Confessin Bot</h4>
+                        <p class="text-gray-400 text-sm">Testimoni & Review Platform</p>
+                    </div>
+                </div>
+                <p class="text-gray-300 leading-relaxed mb-6 max-w-2xl mx-auto">
+                    Terima kasih telah mempercayai Confessin Bot sebagai tempat berbagi cerita dan perasaan kamu. 
+                    Testimoni kamu sangat berharga untuk terus mengembangkan layanan yang lebih baik.
+                </p>
+                
+                <!-- Social Media Links -->
+                <div class="flex justify-center space-x-6 mb-8">
+                    <a href="#" class="text-gray-400 hover:text-coral-red transition-colors clickable">
+                        <i class="fab fa-instagram text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-coral-red transition-colors clickable">
+                        <i class="fab fa-twitter text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-coral-red transition-colors clickable">
+                        <i class="fab fa-telegram text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-coral-red transition-colors clickable">
+                        <i class="fab fa-discord text-2xl"></i>
+                    </a>
+                </div>
+
+                <div class="border-t border-gray-800 pt-8">
+                    <p class="text-gray-400 text-sm">
+                        © 2025 Confessin Bot Testimoni. Semua hak dilindungi undang-undang.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Enhanced click animations
+        document.querySelectorAll('.clickable').forEach(element => {
+            element.addEventListener('click', function(e) {
+                // Create ripple effect
+                const rect = this.getBoundingClientRect();
+                const ripple = document.createElement('span');
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    background: radial-gradient(circle, rgba(233, 90, 107, 0.3) 0%, transparent 70%);
+                    border-radius: 50%;
+                    pointer-events: none;
+                    transform: scale(0);
+                    animation: ripple 0.6s ease-out;
+                `;
+                
+                // Add CSS for ripple animation
+                if (!document.querySelector('#ripple-style')) {
+                    const style = document.createElement('style');
+                    style.id = 'ripple-style';
+                    style.textContent = `
+                        @keyframes ripple {
+                            to {
+                                transform: scale(2);
+                                opacity: 0;
+                            }
+                        }
+                    `;
+                    document.head.appendChild(style);
+                }
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                // Scale animation
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in-up elements
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            observer.observe(el);
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('section');
+            if (parallax) {
+                const speed = scrolled * 0.5;
+                parallax.style.transform = `translateY(${speed}px)`;
+            }
+        });
+
+        // Add hover sound effect (optional)
+        document.querySelectorAll('.testimoni-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                // You can add sound effect here if needed
+                this.style.borderLeft = '4px solid #E95A6B';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.borderLeft = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
