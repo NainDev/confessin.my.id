@@ -238,10 +238,10 @@
                 <p class="text-xl md:text-2xl text-pink-light mb-8 max-w-3xl mx-auto leading-relaxed">
                     Jadilah bagian dari tim yang luar biasa dan bantu jutaan orang berbagi cerita mereka dengan aman dan nyaman
                 </p>
-                <a href="#registration" class="inline-block bg-white text-coral-red px-8 py-4 rounded-full font-bold text-lg shadow-2xl hover:shadow-3xl transition-all hover:scale-105 clickable">
+                <button onclick="scrollToRegistration()" class="inline-block bg-white text-coral-red px-8 py-4 rounded-full font-bold text-lg shadow-2xl hover:shadow-3xl transition-all hover:scale-105 clickable">
                     <i class="fas fa-rocket mr-2"></i>
                     Daftar Sekarang
-                </a>
+                </button>
             </div>
         </div>
         
@@ -475,7 +475,7 @@
                 </p>
                 <div class="border-t border-gray-800 pt-8">
                     <p class="text-gray-400 text-sm">
-                        © 2025 Confessin Team Registration. Made with ❤️ for our amazing team
+                        © 2025 PT. Kreasi Digitalindo. Made with ❤️ for our amazing team
                     </p>
                 </div>
             </div>
@@ -484,6 +484,15 @@
 
     <!-- JavaScript -->
     <script>
+        // Smooth scroll to registration form
+        function scrollToRegistration() {
+            const registrationSection = document.getElementById('registration');
+            registrationSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+
         // Role Selection
         const roleOptions = document.querySelectorAll('.role-option');
         const roleInput = document.getElementById('role');
@@ -626,4 +635,4 @@
         });
     </script>
 </body>
-</html>
+                                </html>
