@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Keuangan Personal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50 h-full">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <h1 class="text-xl font-bold text-gray-900">💰 Dashboard Keuangan</h1>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="addBtn" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">
+                        <i data-lucide="plus" class="w-4 h-4 mr-2"></i>
+                        Tambah
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <!-- Stats Overview -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white overflow-hidden shadow rounded-lg">
+                <div class="p-5">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <i data-lucide="piggy-bank" class="h-6 w-6 text-green-400"></i>
+                        </div>
+                        <div class="ml-5 w-0 flex-1">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 truncate">Total Tabungan</dt>
+                                <dd id="totalSavings" class="text-lg font-medium text-gray-900">Rp 0</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white overflow-hidden shadow rounded-lg">
+                <div class="p-5">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <i data-lucide="target" class="h-6 w-6 text-blue-400"></i>
+                        </div>
+                        <div class="ml-5 w-0 flex-1">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 truncate">Target Aktif</dt>
+                                <dd id="activeTargets" class="text-lg font-medium text-gray-900">0</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white overflow-hidden shadow rounded-lg">
+                <div class="p-5">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <i data-lucide="calendar" class="h-6 w-6 text-purple-400"></i>
+                        </div>
+                        <div class="ml-5 w-0 flex-1">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 truncate">Nabung Hari Ini</dt>
+                                <dd id="todaySavings" class="text-lg font-medium text-gray-900">Rp 0</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabungan Cards -->
+        <div class="mb-8">
+            <h2 class="text-lg font-medium text-gray-900 mb-4">Daftar Tabungan</h2>
+            <div id="savingsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Savings cards will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Options Modal -->
+    <div id="addModal" class="fixed inset-0 z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
+                        <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
+                            <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">Pilih Fitur</h3>
+                            <div class="space-y-3">
+                                <button id="createSavingsBtn" class="w-full flex items-center px-4 py-3 text-left border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                                    <i data-lucide="piggy-bank" class="w-5 h-5 text-green-500 mr-3"></i>
+                                    <div>
+                                        <div class="font-medium text-gray-900">Buat Tabungan</div>
+                                        <div class="text-sm text-gray-500">Buat target tabungan baru</div>
+                                    </div>
+                                </button>
+                                <button class="w-full flex items-center px-4 py-3 text-left border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors opacity-50 cursor-not-allowed">
+                                    <i data-lucide="trophy" class="w-5 h-5 text-yellow-500 mr-3"></i>
+                                    <div>
+                                        <div class="font-medium text-gray-900">Pencapaian</div>
+                                        <div class="text-sm text-gray-500">Segera hadir</div>
+                                    </div>
+                                </button>
+                                <button class="w-full flex items-center px-4 py-3 text-left border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors opacity-50 cursor-not-allowed">
+                                    <i data-lucide="calculator" class="w-5 h-5 text-blue-500 mr-3"></i>
+                                    <div>
+                                        <div class="font-medium text-gray-900">Kalkulator</div>
+                                        <div class="text-sm text-gray-500">Segera hadir</div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button id="closeAddModal" class="w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none sm:mt-0 sm:w-auto sm:text-sm">
+                        Tutup
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Savings Modal -->
+    <div id="createSavingsModal" class="fixed inset-0 z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                <form id="createSavingsForm">
+                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                        <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">Buat Tabungan Baru</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label for="savingsName" class="block text-sm font-medium text-gray-700">Nama Tabungan</label>
+                                <input type="text" id="savingsName" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm px-3 py-2 border">
+                            </div>
+                            <div>
+                                <label for="targetAmount" class="block text-sm font-medium text-gray-700">Target Jumlah (Rp)</label>
+                                <input type="number" id="targetAmount" required min="0" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm px-3 py-2 border">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                        <button type="submit" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">
+                            Buat Tabungan
+                        </button>
+                        <button type="button" id="closeSavingsModal" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none sm:mt-0 sm:w-auto sm:text-sm">
+                            Batal
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Money Modal -->
+    <div id="addMoneyModal" class="fixed inset-0 z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                <form id="addMoneyForm">
+                    <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                        <h3 id="addMoneyTitle" class="text-lg leading-6 font-medium text-gray-900 mb-4">Tambah Uang</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label for="addAmount" class="block text-sm font-medium text-gray-700">Jumlah (Rp)</label>
+                                <input type="number" id="addAmount" required min="1" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm px-3 py-2 border">
+                            </div>
+                            <div>
+                                <label for="note" class="block text-sm font-medium text-gray-700">Catatan (opsional)</label>
+                                <textarea id="note" rows="3" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm px-3 py-2 border"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                        <button type="submit" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">
+                            Tambah
+                        </button>
+                        <button type="button" id="closeAddMoneyModal" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none sm:mt-0 sm:w-auto sm:text-sm">
+                            Batal
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data storage using JavaScript variables (will persist during session)
+        let savingsData = JSON.parse(window.localStorage?.getItem('financeData')) || [];
+        let currentSavingsId = null;
+
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Utility functions
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(amount);
+        }
+
+        function formatDate(date) {
+            return new Intl.DateTimeFormat('id-ID', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            }).format(new Date(date));
+        }
+
+        function saveData() {
+            if (window.localStorage) {
+                window.localStorage.setItem('financeData', JSON.stringify(savingsData));
+            }
+        }
+
+        function updateStats() {
+            const totalSavings = savingsData.reduce((sum, saving) => sum + saving.currentAmount, 0);
+            const activeTargets = savingsData.length;
+            
+            // Calculate today's savings
+            const today = new Date().toDateString();
+            const todaySavings = savingsData.reduce((sum, saving) => {
+                const todayTransactions = saving.transactions.filter(t => 
+                    new Date(t.date).toDateString() === today
+                );
+                return sum + todayTransactions.reduce((daySum, t) => daySum + t.amount, 0);
+            }, 0);
+
+            document.getElementById('totalSavings').textContent = formatCurrency(totalSavings);
+            document.getElementById('activeTargets').textContent = activeTargets;
+            document.getElementById('todaySavings').textContent = formatCurrency(todaySavings);
+        }
+
+        function renderSavings() {
+            const container = document.getElementById('savingsContainer');
+            
+            if (savingsData.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full text-center py-12">
+                        <i data-lucide="piggy-bank" class="w-12 h-12 text-gray-400 mx-auto mb-4"></i>
+                        <h3 class="text-lg font-medium text-gray-900 mb-2">Belum ada tabungan</h3>
+                        <p class="text-gray-500 mb-4">Mulai dengan membuat tabungan pertama Anda</p>
+                        <button onclick="showAddModal()" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
+                            <i data-lucide="plus" class="w-4 h-4 mr-2"></i>
+                            Buat Tabungan
+                        </button>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = savingsData.map(saving => {
+                    const progress = (saving.currentAmount / saving.targetAmount) * 100;
+                    const isCompleted = saving.currentAmount >= saving.targetAmount;
+                    
+                    return `
+                        <div class="bg-white overflow-hidden shadow rounded-lg">
+                            <div class="p-5">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="text-lg font-medium text-gray-900 truncate">${saving.name}</h3>
+                                    ${isCompleted ? '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Tercapai</span>' : ''}
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <div class="flex justify-between text-sm text-gray-600 mb-1">
+                                        <span>${formatCurrency(saving.currentAmount)}</span>
+                                        <span>${formatCurrency(saving.targetAmount)}</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-indigo-600 h-2 rounded-full transition-all duration-500" style="width: ${Math.min(progress, 100)}%"></div>
+                                    </div>
+                                    <div class="text-center text-sm text-gray-500 mt-1">${progress.toFixed(1)}%</div>
+                                </div>
+
+                                <div class="space-y-2">
+                                    <button onclick="showAddMoneyModal('${saving.id}')" class="w-full inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 transition-colors">
+                                        <i data-lucide="plus" class="w-4 h-4 mr-2"></i>
+                                        Tambah Uang
+                                    </button>
+                                    
+                                    ${saving.transactions.length > 0 ? `
+                                        <div class="text-sm text-gray-500">
+                                            <div class="font-medium">Transaksi terakhir:</div>
+                                            <div>${formatDate(saving.transactions[saving.transactions.length - 1].date)}</div>
+                                            <div>${formatCurrency(saving.transactions[saving.transactions.length - 1].amount)}</div>
+                                        </div>
+                                    ` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+            
+            // Reinitialize Lucide icons
+            lucide.createIcons();
+        }
+
+        // Modal functions
+        function showAddModal() {
+            document.getElementById('addModal').classList.remove('hidden');
+        }
+
+        function hideAddModal() {
+            document.getElementById('addModal').classList.add('hidden');
+        }
+
+        function showCreateSavingsModal() {
+            hideAddModal();
+            document.getElementById('createSavingsModal').classList.remove('hidden');
+        }
+
+        function hideCreateSavingsModal() {
+            document.getElementById('createSavingsModal').classList.add('hidden');
+            document.getElementById('createSavingsForm').reset();
+        }
+
+        function showAddMoneyModal(savingsId) {
+            currentSavingsId = savingsId;
+            const saving = savingsData.find(s => s.id === savingsId);
+            document.getElementById('addMoneyTitle').textContent = `Tambah Uang ke ${saving.name}`;
+            document.getElementById('addMoneyModal').classList.remove('hidden');
+        }
+
+        function hideAddMoneyModal() {
+            document.getElementById('addMoneyModal').classList.add('hidden');
+            document.getElementById('addMoneyForm').reset();
+            currentSavingsId = null;
+        }
+
+        // Event listeners
+        document.getElementById('addBtn').addEventListener('click', showAddModal);
+        document.getElementById('closeAddModal').addEventListener('click', hideAddModal);
+        document.getElementById('createSavingsBtn').addEventListener('click', showCreateSavingsModal);
+        document.getElementById('closeSavingsModal').addEventListener('click', hideCreateSavingsModal);
+        document.getElementById('closeAddMoneyModal').addEventListener('click', hideAddMoneyModal);
+
+        // Form submissions
+        document.getElementById('createSavingsForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('savingsName').value.trim();
+            const targetAmount = parseInt(document.getElementById('targetAmount').value);
+            
+            if (name && targetAmount > 0) {
+                const newSaving = {
+                    id: Date.now().toString(),
+                    name: name,
+                    targetAmount: targetAmount,
+                    currentAmount: 0,
+                    transactions: [],
+                    createdAt: new Date().toISOString()
+                };
+                
+                savingsData.push(newSaving);
+                saveData();
+                updateStats();
+                renderSavings();
+                hideCreateSavingsModal();
+            }
+        });
+
+        document.getElementById('addMoneyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const amount = parseInt(document.getElementById('addAmount').value);
+            const note = document.getElementById('note').value.trim();
+            
+            if (amount > 0 && currentSavingsId) {
+                const saving = savingsData.find(s => s.id === currentSavingsId);
+                if (saving) {
+                    saving.currentAmount += amount;
+                    saving.transactions.push({
+                        id: Date.now().toString(),
+                        amount: amount,
+                        note: note,
+                        date: new Date().toISOString()
+                    });
+                    
+                    saveData();
+                    updateStats();
+                    renderSavings();
+                    hideAddMoneyModal();
+                }
+            }
+        });
+
+        // Close modals when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('fixed') && e.target.classList.contains('inset-0')) {
+                hideAddModal();
+                hideCreateSavingsModal();
+                hideAddMoneyModal();
+            }
+        });
+
+        // Initialize app
+        updateStats();
+        renderSavings();
+    </script>
+</body>
+</html>
