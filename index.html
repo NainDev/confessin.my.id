@@ -3,24 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sarah Digital Creator - Bio Link</title>
+    <title>Confessin - Platform Confess Terpercaya</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="shortcut icon" href="https://files.catbox.moe/yw1vlz.jpg" type="image/x-icon" />
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'purple-primary': '#6366F1',
-                        'purple-secondary': '#8B5CF6',
-                        'blue-primary': '#3B82F6',
-                        'blue-secondary': '#1D4ED8',
-                        'pink-accent': '#EC4899',
-                        'orange-accent': '#F97316'
+                        'pastel-pink': '#FADADD',
+                        'coral-red': '#E95A6B',
+                        'pink-light': '#ffe0e0',
+                        'pink-dark': '#c4485a'
                     },
                     fontFamily: {
-                        'inter': ['Inter', 'sans-serif']
+                        'poppins': ['Poppins', 'sans-serif']
                     }
                 }
             }
@@ -28,821 +27,944 @@
     </script>
     <style>
         body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom, #FADADD 0%, #ffffff 100%);
         }
         
-        .glass-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        .gradient-bg {
+            background: linear-gradient(135deg, #E95A6B 0%, #c4485a 100%);
         }
         
-        .bio-link-button {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(233, 90, 107, 0.25);
+        }
+        
+        .hero-pattern {
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.2) 2px, transparent 2px),
+                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        .hero-bg {
+            background: linear-gradient(135deg, #E95A6B 0%, #c4485a 100%);
+        }
+
+        .clickable {
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            padding: 16px 20px;
-            text-decoration: none;
-            color: white;
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 16px;
-        }
-        
-        .bio-link-button:hover {
-            transform: translateY(-6px) scale(1.02);
-            background: rgba(255, 255, 255, 0.25);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-        }
-        
-        .bio-link-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .bio-link-button:hover::before {
-            left: 100%;
-        }
-        
-        .floating-profile {
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(2deg); }
-        }
-        
-        .social-icon {
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
             transition: all 0.3s ease;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            margin: 0 6px;
         }
-        
-        .social-icon:hover {
-            transform: translateY(-4px) scale(1.1);
-            background: rgba(255, 255, 255, 0.3);
+
+        .clickable:hover {
+            transform: scale(1.05);
         }
-        
-        .stats-card {
-            background: rgba(255, 255, 255, 0.15);
+
+        .clickable:active {
+            transform: scale(0.95);
+        }
+
+        .stat-card {
             backdrop-filter: blur(20px);
-            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.9);
             border: 1px solid rgba(255, 255, 255, 0.2);
             transition: all 0.3s ease;
-            padding: 16px;
-            text-align: center;
         }
-        
-        .stats-card:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-4px);
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(233, 90, 107, 0.15);
         }
-        
-        .gradient-purple {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-        
-        .gradient-blue {
-            background: linear-gradient(135deg, #667eea 0%, #3B82F6 100%);
-        }
-        
-        .gradient-pink {
-            background: linear-gradient(135deg, #EC4899 0%, #BE185D 100%);
-        }
-        
-        .gradient-orange {
-            background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
-        }
-        
-        .gradient-green {
-            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
-        }
-        
-        .gradient-teal {
-            background: linear-gradient(135deg, #14B8A6 0%, #0F766E 100%);
-        }
-        
-        .blob-1 {
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 100%);
-            border-radius: 50%;
-            filter: blur(40px);
-            animation: blob 8s ease-in-out infinite;
-        }
-        
-        .blob-2 {
-            position: absolute;
-            width: 150px;
-            height: 150px;
-            background: linear-gradient(135deg, rgba(236, 72, 153, 0.3) 0%, rgba(168, 85, 247, 0.3) 100%);
-            border-radius: 50%;
-            filter: blur(40px);
-            animation: blob 8s ease-in-out infinite reverse;
-        }
-        
-        @keyframes blob {
-            0%, 100% { transform: translate(0px, 0px) scale(1); }
-            33% { transform: translate(30px, -50px) scale(1.1); }
-            66% { transform: translate(-20px, 20px) scale(0.9); }
-        }
-        
-        .typing-text::after {
-            content: '|';
-            animation: blink 1s infinite;
-        }
-        
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.8s ease-out forwards;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        
-        @keyframes fadeIn {
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        
-        /* Responsive Styles */
-        @media (max-width: 768px) {
-            .bio-link-button {
-                padding: 14px 18px;
-                margin-bottom: 12px;
-            }
-            
-            .bio-link-button:hover {
-                transform: translateY(-3px) scale(1.01);
-            }
-            
-            .social-icon {
-                width: 45px;
-                height: 45px;
-                margin: 0 4px;
-            }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
         }
-        
-        @media (min-width: 1024px) {
-            .desktop-layout {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 3rem;
-                align-items: start;
-            }
-            
-            .bio-links-grid {
-                display: grid;
-                grid-template-columns: 1fr;
-                gap: 0.75rem;
-            }
-            
-            .profile-section {
-                position: sticky;
-                top: 2rem;
-            }
+
+        .mobile-menu {
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+            backdrop-filter: blur(20px);
+            background: rgba(233, 90, 107, 0.95);
         }
-        
-        /* Ensure all bio links are visible */
-        .bio-links-container {
-            max-height: none !important;
-            overflow: visible !important;
+
+        .mobile-menu.active {
+            transform: translateY(0);
         }
-        
-        @keyframes ripple {
-            to {
-                transform: scale(20);
-                opacity: 0;
-            }
+
+        /* Horizontal slider for statistics */
+        .stat-slider-container {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .stat-slider-track {
+            display: flex;
+            transition: transform 0.5s ease;
+            width: 300%; /* 3 slides */
+        }
+
+        .stat-slide {
+            flex: 0 0 33.333%;
+            padding: 0 1rem;
+        }
+
+        /* Vertical slider for features */
+        .feature-slider-container {
+            overflow: hidden;
+            position: relative;
+            height: 500px;
+        }
+
+        .feature-slider-track {
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.5s ease;
+            height: 300%; /* 3 slides */
+        }
+
+        .feature-slide {
+            flex: 0 0 33.333%;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.5s ease;
+        }
+
+        .feature-slide.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .testimonial-card {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.95);
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(233, 90, 107, 0.15);
+        }
+
+        @keyframes countUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .count-animation {
+            animation: countUp 1s ease-out forwards;
+        }
+
+        .documentation-card {
+            transition: all 0.3s ease;
+        }
+
+        .documentation-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 35px rgba(233, 90, 107, 0.2);
+        }
+
+        .navbar-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-hidden {
+            transform: translateY(-100%);
+        }
+
+        /* Enhanced feature section styling */
+        .feature-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(250, 218, 221, 0.9) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(233, 90, 107, 0.1);
+        }
+
+        .feature-icon-wrapper {
+            background: linear-gradient(135deg, #E95A6B 0%, #c4485a 100%);
+            box-shadow: 0 10px 30px rgba(233, 90, 107, 0.3);
         }
     </style>
 </head>
 <body>
-    <!-- Background Blobs -->
-    <div class="blob-1 top-20 right-10"></div>
-    <div class="blob-2 top-40 left-20"></div>
-    
-    <div class="min-h-screen py-6 px-4">
-        <!-- Mobile Layout (default) -->
-        <div class="lg:hidden max-w-md mx-auto space-y-6">
-            <!-- Mobile Profile Section -->
-            <div class="glass-card p-6 text-center fade-in">
-                <div class="floating-profile mb-4">
-                    <div class="w-24 h-24 mx-auto mb-4 relative">
-                        <img src="https://files.catbox.moe/yw1vlz.jpg" 
-                             alt="Profile Picture" 
-                             class="w-full h-full object-cover rounded-full border-4 border-white/30 shadow-lg">
-                        <div class="absolute -bottom-1 -right-1 w-6 h-6 gradient-green rounded-full flex items-center justify-center border-2 border-white">
-                            <i class="ri-checkbox-circle-fill text-white text-xs"></i>
-                        </div>
+    <!-- Header - Fixed Navigation -->
+    <header class="navbar-fixed gradient-bg shadow-xl backdrop-blur-md">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center space-x-4">
+                    <div class="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all clickable" onclick="scrollToTop()">
+                        <i class="fas fa-heart text-coral-red text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-white font-bold text-2xl drop-shadow-lg">Confessin</h1>
+                        <p class="text-pink-light text-sm font-medium">Platform Confess Terpercaya</p>
                     </div>
                 </div>
                 
-                <h1 class="text-2xl font-black text-white mb-2">Sarah Digital Creator</h1>
-                <p class="text-base text-white/80 mb-3 typing-text">Content Creator & Influencer</p>
+                <!-- Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#statistics" class="nav-link text-white hover:text-pink-light transition-all duration-300 font-medium relative group clickable">
+                        Statistik
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-pink-light transition-all group-hover:w-full"></span>
+                    </a>
+                    <a href="#features" class="nav-link text-white hover:text-pink-light transition-all duration-300 font-medium relative group clickable">
+                        Fitur
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-pink-light transition-all group-hover:w-full"></span>
+                    </a>
+                    <a href="#documentation" class="nav-link text-white hover:text-pink-light transition-all duration-300 font-medium relative group clickable">
+                        Panduan
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-pink-light transition-all group-hover:w-full"></span>
+                    </a>
+                    <a href="#testimonials" class="nav-link text-white hover:text-pink-light transition-all duration-300 font-medium relative group clickable">
+                        Testimoni
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-pink-light transition-all group-hover:w-full"></span>
+                    </a>
+                    <button onclick="startConfess()" class="bg-white text-coral-red px-6 py-2 rounded-full font-semibold hover:bg-pink-light transition-all shadow-lg hover:shadow-xl clickable">
+                        <i class="fas fa-paper-plane mr-2"></i>Mulai Confess
+                    </button>
+                </nav>
                 
-                <p class="text-white/70 leading-relaxed text-sm mb-4">
-                    <i class="ri-map-pin-line"></i> Jakarta, Indonesia<br>
-                    <i class="ri-palette-line"></i> Creating beautiful content daily<br>
-                    <i class="ri-star-line"></i> Inspiring 100k+ followers worldwide
-                </p>
-                
-                <!-- Mobile Stats -->
-                <div class="grid grid-cols-3 gap-3 mb-4">
-                    <div class="stats-card">
-                        <div class="text-lg font-black text-white mb-1">125K</div>
-                        <div class="text-xs text-white/70">Followers</div>
-                    </div>
-                    <div class="stats-card">
-                        <div class="text-lg font-black text-white mb-1">2.5M</div>
-                        <div class="text-xs text-white/70">Likes</div>
-                    </div>
-                    <div class="stats-card">
-                        <div class="text-lg font-black text-white mb-1">850</div>
-                        <div class="text-xs text-white/70">Posts</div>
-                    </div>
-                </div>
-                
-                <!-- Mobile Social Icons -->
-                <div class="flex justify-center flex-wrap">
-                    <a href="#" class="social-icon">
-                        <i class="ri-instagram-line text-lg text-white"></i>
-                    </a>
-                    <a href="#" class="social-icon">
-                        <i class="ri-youtube-line text-lg text-white"></i>
-                    </a>
-                    <a href="#" class="social-icon">
-                        <i class="ri-tiktok-line text-lg text-white"></i>
-                    </a>
-                    <a href="#" class="social-icon">
-                        <i class="ri-linkedin-line text-lg text-white"></i>
-                    </a>
-                    <a href="#" class="social-icon">
-                        <i class="ri-twitter-line text-lg text-white"></i>
-                    </a>
-                    <a href="#" class="social-icon">
-                        <i class="ri-facebook-line text-lg text-white"></i>
-                    </a>
-                </div>
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden text-white p-2 clickable">
+                    <i class="fas fa-bars text-xl" id="mobileMenuIcon"></i>
+                </button>
             </div>
-            
-            <!-- Mobile Bio Links -->
-            <div class="bio-links-container space-y-3">
-                <!-- Instagram -->
-                <a href="https://www.instagram.com/nainnrp" class="bio-link-button fade-in" style="animation-delay: 0.2s;">
-                    <div class="w-10 h-10 gradient-pink rounded-full flex items-center justify-center mr-3">
-                        <i class="ri-instagram-line text-white text-lg"></i>
-                    </div>
-                    <div class="flex-1">
-                        <h3 class="font-bold text-base">Follow My Instagram</h3>
-                        <p class="text-xs text-white/70">Daily lifestyle & beauty content</p>
-                    </div>
-                    <div class="text-white/70">
-                        <i class="ri-arrow-right-line text-xl"></i>
-                    </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="mobile-menu md:hidden absolute top-full left-0 right-0 shadow-xl">
+            <div class="container mx-auto px-4 py-4 space-y-4">
+                <a href="#statistics" class="block text-white hover:text-pink-light transition-all font-medium clickable">
+                    <i class="fas fa-chart-bar mr-2"></i>Statistik
                 </a>
-                
-                <!-- YouTube -->
-                <a href="#" class="bio-link-button fade-in" style="animation-delay: 0.3s;">
-                    <div class="w-10 h-10 bg-red-500 rounded-full flex items-center justify-center mr-3">
-                        <i class="ri-youtube-line text-white text-lg"></i>
-                    </div>
-                    <div class="flex-1">
-                        <h3 class="font-bold text-base">YouTube Channel</h3>
-                        <p class="text-xs text-white/70">Weekly tutorials & vlogs</p>
-                    </div>
-                    <div class="text-white/70">
-                        <i class="ri-arrow-right-line text-xl"></i>
-                    </div>
+                <a href="#features" class="block text-white hover:text-pink-light transition-all font-medium clickable">
+                    <i class="fas fa-star mr-2"></i>Fitur
                 </a>
-                
-                <!-- TikTok -->
-                <a href="#" class="bio-link-button fade-in" style="animation-delay: 0.4s;">
-                    <div class="w-10 h-10 bg-black rounded-full flex items-center justify-center mr-3">
-                        <i class="ri-tiktok-line text-white text-lg"></i>
-                    </div>
-                    <div class="flex-1">
-                        <h3 class="font-bold text-base">TikTok Videos</h3>
-                        <p class="text-xs text-white/70">Fun & trending content</p>
-                    </div>
-                    <div class="text-white/70">
-                        <i class="ri-arrow-right-line text-xl"></i>
-                    </div>
+                <a href="#documentation" class="block text-white hover:text-pink-light transition-all font-medium clickable">
+                    <i class="fas fa-book mr-2"></i>Panduan
                 </a>
-                
-                <!-- LinkedIn -->
-                <a href="#" class="bio-link-button fade-in" style="animation-delay: 0.5s;">
-                    <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center mr-3">
-                        <i class="ri-linkedin-line text-white text-lg"></i>
-                    </div>
-                    <div class="flex-1">
-                        <h3 class="font-bold text-base">LinkedIn Profile</h3>
-                        <p class="text-xs text-white/70">Professional networking</p>
-                    </div>
-                    <div class="text-white/70">
-                        <i class="ri-arrow-right-line text-xl"></i>
-                    </div>
+                <a href="#testimonials" class="block text-white hover:text-pink-light transition-all font-medium clickable">
+                    <i class="fas fa-comments mr-2"></i>Testimoni
                 </a>
-                
-                <!-- Twitter -->
-                <a href="#" class="bio-link-button fade-in" style="animation-delay: 0.6s;">
-                    <div class="w-10 h-10 gradient-teal rounded-full flex items-center justify-center mr-3">
-                        <i class="ri-twitter-line text-white text-lg"></i>
-                    </div>
-                    <div class="flex-1">
-                        <h3 class="font-bold text-base">Follow on Twitter</h3>
-                        <p class="text-xs text-white/70">Daily thoughts & updates</p>
-                    </div>
-                    <div class="text-white/70">
-                        <i class="ri-arrow-right-line text-xl"></i>
-                    </div>
-                </a>
-                
-                <!-- Facebook -->
-                <a href="#" class="bio-link-button fade-in" style="animation-delay: 0.7s;">
-                    <div class="w-10 h-10 bg-blue-700 rounded-full flex items-center justify-center mr-3">
-                        <i class="ri-facebook-line text-white text-lg"></i>
-                    </div>
-                    <div class="flex-1">
-                        <h3 class="font-bold text-base">Facebook Page</h3>
-                        <p class="text-xs text-white/70">Community & updates</p>
-                    </div>
-                    <div class="text-white/70">
-                        <i class="ri-arrow-right-line text-xl"></i>
-                    </div>
-                </a>
-                
-                <!-- Online Store -->
-                <a href="#" class="bio-link-button fade-in" style="animation-delay: 0.8s;">
-                    <div class="w-10 h-10 gradient-orange rounded-full flex items-center justify-center mr-3">
-                        <i class="ri-shopping-bag-line text-white text-lg"></i>
-                    </div>
-                    <div class="flex-1">
-                        <h3 class="font-bold text-base">My Online Store</h3>
-                        <p class="text-xs text-white/70">Curated fashion & beauty items</p>
-                    </div>
-                    <div class="text-white/70">
-                        <i class="ri-arrow-right-line text-xl"></i>
-                    </div>
-                </a>
-                
-                <!-- Blog -->
-                <a href="#" class="bio-link-button fade-in" style="animation-delay: 0.9s;">
-                    <div class="w-10 h-10 gradient-blue rounded-full flex items-center justify-center mr-3">
-                        <i class="ri-quill-pen-line text-white text-lg"></i>
-                    </div>
-                    <div class="flex-1">
-                        <h3 class="font-bold text-base">Personal Blog</h3>
-                        <p class="text-xs text-white/70">Life stories & inspiration</p>
-                    </div>
-                    <div class="text-white/70">
-                        <i class="ri-arrow-right-line text-xl"></i>
-                    </div>
-                </a>
-                
-                <!-- Podcast -->
-                <a href="#" class="bio-link-button fade-in" style="animation-delay: 1.0s;">
-                    <div class="w-10 h-10 gradient-purple rounded-full flex items-center justify-center mr-3">
-                        <i class="ri-mic-line text-white text-lg"></i>
-                    </div>
-                    <div class="flex-1">
-                        <h3 class="font-bold text-base">My Podcast</h3>
-                        <p class="text-xs text-white/70">Weekly talks on creativity</p>
-                    </div>
-                    <div class="text-white/70">
-                        <i class="ri-arrow-right-line text-xl"></i>
-                    </div>
-                </a>
-                
-                <!-- Newsletter -->
-                <a href="#" class="bio-link-button fade-in" style="animation-delay: 1.1s;">
-                    <div class="w-10 h-10 gradient-green rounded-full flex items-center justify-center mr-3">
-                        <i class="ri-mail-line text-white text-lg"></i>
-                    </div>
-                    <div class="flex-1">
-                        <h3 class="font-bold text-base">Weekly Newsletter</h3>
-                        <p class="text-xs text-white/70">Exclusive tips & updates</p>
-                    </div>
-                    <div class="text-white/70">
-                        <i class="ri-arrow-right-line text-xl"></i>
-                    </div>
-                </a>
-                
-                <!-- Contact -->
-                <a href="#" class="bio-link-button fade-in" style="animation-delay: 1.2s;">
-                    <div class="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mr-3">
-                        <i class="ri-message-3-line text-white text-lg"></i>
-                    </div>
-                    <div class="flex-1">
-                        <h3 class="font-bold text-base">Business Inquiry</h3>
-                        <p class="text-xs text-white/70">Let's collaborate together</p>
-                    </div>
-                    <div class="text-white/70">
-                        <i class="ri-arrow-right-line text-xl"></i>
-                    </div>
-                </a>
+                <button onclick="startConfess()" class="w-full bg-white text-coral-red px-6 py-3 rounded-full font-semibold hover:bg-pink-light transition-all shadow-lg clickable">
+                    <i class="fas fa-paper-plane mr-2"></i>Mulai Confess
+                </button>
             </div>
-            
-            <!-- Mobile Footer -->
-            <div class="text-center fade-in" style="animation-delay: 1.4s;">
-                <p class="text-white/60 text-xs mb-3">
-                    <i class="ri-star-smile-line"></i> Created with love using modern design
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-bg hero-pattern py-20 relative overflow-hidden" style="margin-top: 80px;">
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <div class="fade-in-up">
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 drop-shadow-2xl">
+                    Bagikan Ceritamu dengan <span class="text-yellow-300">Aman</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-pink-light mb-8 max-w-3xl mx-auto leading-relaxed">
+                    Platform terpercaya untuk berbagi confess secara anonim. Ceritakan apa yang ada di hatimu tanpa khawatir identitas terungkap.
                 </p>
-                <div class="flex justify-center space-x-4 text-white/50 text-xs">
-                    <span><i class="ri-copyright-line"></i> 2025 Sarah Digital Creator</span>
-                    <span>•</span>
-                    <span>Made with <i class="ri-heart-fill text-red-400"></i></span>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <button onclick="startConfess()" class="bg-white text-coral-red px-8 py-4 rounded-full font-bold text-lg shadow-2xl hover:shadow-3xl transition-all hover:scale-105 clickable">
+                        <i class="fas fa-heart mr-2"></i>
+                        Kirim Confess
+                    </button>
+                    <button onclick="scrollToFeatures()" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-coral-red transition-all clickable">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        Pelajari Lebih Lanjut
+                    </button>
                 </div>
             </div>
         </div>
         
-        <!-- Desktop Layout -->
-        <div class="hidden lg:block max-w-6xl mx-auto">
-            <div class="desktop-layout">
-                <!-- Desktop Profile Section (Left) -->
-                <div class="profile-section">
-                    <div class="glass-card p-8 text-center fade-in">
-                        <div class="floating-profile mb-6">
-                            <div class="w-36 h-36 mx-auto mb-6 relative">
-                                <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=144&h=144&fit=crop&crop=face" 
-                                     alt="Profile Picture" 
-                                     class="w-full h-full object-cover rounded-full border-4 border-white/30 shadow-lg">
-                                <div class="absolute -bottom-2 -right-2 w-10 h-10 gradient-green rounded-full flex items-center justify-center border-2 border-white">
-                                    <i class="ri-checkbox-circle-fill text-white text-lg"></i>
+        <!-- Floating Elements -->
+        <div class="absolute top-20 left-10 w-20 h-20 bg-white bg-opacity-20 rounded-full animate-pulse"></div>
+        <div class="absolute top-40 right-20 w-16 h-16 bg-white bg-opacity-10 rounded-full animate-pulse delay-1000"></div>
+        <div class="absolute bottom-20 left-1/4 w-12 h-12 bg-white bg-opacity-15 rounded-full animate-pulse delay-2000"></div>
+    </section>
+
+    <!-- Statistics Section - Horizontal Slider -->
+    <section id="statistics" class="py-20 -mt-10 relative z-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Statistik Platform</h2>
+                <p class="text-xl text-gray-600">Data real-time pengguna dan confess di platform kami</p>
+            </div>
+
+            <!-- Desktop View -->
+            <div class="hidden md:grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                <!-- Total Users -->
+                <div class="stat-card rounded-3xl p-8 shadow-xl text-center">
+                    <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-users text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-3xl font-bold text-gray-800 mb-2 count-animation" data-count="15742">0</h3>
+                    <p class="text-gray-600 font-medium">Total Pengguna</p>
+                </div>
+
+                <!-- Success Confess -->
+                <div class="stat-card rounded-3xl p-8 shadow-xl text-center">
+                    <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-paper-plane text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-3xl font-bold text-gray-800 mb-2 count-animation" data-count="28634">0</h3>
+                    <p class="text-gray-600 font-medium">Confess Terkirim</p>
+                </div>
+
+                <!-- Failed Confess -->
+                <div class="stat-card rounded-3xl p-8 shadow-xl text-center">
+                    <div class="w-16 h-16 bg-gradient-to-r from-red-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-exclamation-triangle text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-3xl font-bold text-gray-800 mb-2 count-animation" data-count="1247">0</h3>
+                    <p class="text-gray-600 font-medium">Confess Gagal</p>
+                </div>
+            </div>
+
+            <!-- Mobile Horizontal Slider -->
+            <div class="md:hidden">
+                <div class="stat-slider-container max-w-sm mx-auto">
+                    <div class="stat-slider-track" id="statSliderTrack">
+                        <!-- Slide 1 -->
+                        <div class="stat-slide">
+                            <div class="stat-card rounded-3xl p-8 shadow-xl text-center">
+                                <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-users text-white text-xl"></i>
                                 </div>
+                                <h3 class="text-3xl font-bold text-gray-800 mb-2 count-animation" data-count="15742">15,742</h3>
+                                <p class="text-gray-600 font-medium">Total Pengguna</p>
                             </div>
                         </div>
                         
-                        <h1 class="text-4xl font-black text-white mb-3">Sarah Digital Creator</h1>
-                        <p class="text-xl text-white/80 mb-6 typing-text">Content Creator & Influencer</p>
-                        
-                        <p class="text-white/70 leading-relaxed mb-8 text-lg">
-                            <i class="ri-map-pin-line"></i> Jakarta, Indonesia<br>
-                            <i class="ri-palette-line"></i> Creating beautiful content daily<br>
-                            <i class="ri-star-line"></i> Inspiring 100k+ followers worldwide
-                        </p>
-                        
-                        <!-- Desktop Stats -->
-                        <div class="grid grid-cols-3 gap-4 mb-8">
-                            <div class="stats-card">
-                                <div class="text-3xl font-black text-white mb-2">125K</div>
-                                <div class="text-sm text-white/70">Followers</div>
-                            </div>
-                            <div class="stats-card">
-                                <div class="text-3xl font-black text-white mb-2">2.5M</div>
-                                <div class="text-sm text-white/70">Likes</div>
-                            </div>
-                            <div class="stats-card">
-                                <div class="text-3xl font-black text-white mb-2">850</div>
-                                <div class="text-sm text-white/70">Posts</div>
+                        <!-- Slide 2 -->
+                        <div class="stat-slide">
+                            <div class="stat-card rounded-3xl p-8 shadow-xl text-center">
+                                <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-paper-plane text-white text-xl"></i>
+                                </div>
+                                <h3 class="text-3xl font-bold text-gray-800 mb-2 count-animation" data-count="28634">28,634</h3>
+                                <p class="text-gray-600 font-medium">Confess Terkirim</p>
                             </div>
                         </div>
                         
-                        <!-- Desktop Social Icons -->
-                        <div class="flex justify-center flex-wrap gap-3">
-                            <a href="#" class="social-icon">
-                                <i class="ri-instagram-line text-xl text-white"></i>
-                            </a>
-                            <a href="#" class="social-icon">
-                                <i class="ri-youtube-line text-xl text-white"></i>
-                            </a>
-                            <a href="#" class="social-icon">
-                                <i class="ri-tiktok-line text-xl text-white"></i>
-                            </a>
-                            <a href="#" class="social-icon">
-                                <i class="ri-linkedin-line text-xl text-white"></i>
-                            </a>
-                            <a href="#" class="social-icon">
-                                <i class="ri-twitter-line text-xl text-white"></i>
-                            </a>
-                            <a href="#" class="social-icon">
-                                <i class="ri-facebook-line text-xl text-white"></i>
-                            </a>
+                        <!-- Slide 3 -->
+                        <div class="stat-slide">
+                            <div class="stat-card rounded-3xl p-8 shadow-xl text-center">
+                                <div class="w-16 h-16 bg-gradient-to-r from-red-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-exclamation-triangle text-white text-xl"></i>
+                                </div>
+                                <h3 class="text-3xl font-bold text-gray-800 mb-2 count-animation" data-count="1247">1,247</h3>
+                                <p class="text-gray-600 font-medium">Confess Gagal</p>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Desktop Bio Links Section (Right) -->
-                <div class="bio-links-grid fade-in" style="animation-delay: 0.3s;">
-                    <!-- All Bio Links for Desktop -->
-                    <a href="#" class="bio-link-button fade-in" style="animation-delay: 0.2s;">
-                        <div class="w-12 h-12 gradient-pink rounded-full flex items-center justify-center mr-4">
-                            <i class="ri-instagram-line text-white text-xl"></i>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="font-bold text-lg">Follow My Instagram</h3>
-                            <p class="text-sm text-white/70">Daily lifestyle & beauty content</p>
-                        </div>
-                        <div class="text-white/70">
-                            <i class="ri-arrow-right-line text-2xl"></i>
-                        </div>
-                    </a>
-                    
-                    <a href="#" class="bio-link-button fade-in" style="animation-delay: 0.3s;">
-                        <div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center mr-4">
-                            <i class="ri-youtube-line text-white text-xl"></i>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="font-bold text-lg">YouTube Channel</h3>
-                            <p class="text-sm text-white/70">Weekly tutorials & vlogs</p>
-                        </div>
-                        <div class="text-white/70">
-                            <i class="ri-arrow-right-line text-2xl"></i>
-                        </div>
-                    </a>
-                    
-                    <a href="#" class="bio-link-button fade-in" style="animation-delay: 0.4s;">
-                        <div class="w-12 h-12 bg-black rounded-full flex items-center justify-center mr-4">
-                            <i class="ri-tiktok-line text-white text-xl"></i>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="font-bold text-lg">TikTok Videos</h3>
-                            <p class="text-sm text-white/70">Fun & trending content</p>
-                        </div>
-                        <div class="text-white/70">
-                            <i class="ri-arrow-right-line text-2xl"></i>
-                        </div>
-                    </a>
-                    
-                    <a href="#" class="bio-link-button fade-in" style="animation-delay: 0.5s;">
-                        <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-4">
-                            <i class="ri-linkedin-line text-white text-xl"></i>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="font-bold text-lg">LinkedIn Profile</h3>
-                            <p class="text-sm text-white/70">Professional networking</p>
-                        </div>
-                        <div class="text-white/70">
-                            <i class="ri-arrow-right-line text-2xl"></i>
-                        </div>
-                    </a>
-                    
-                    <a href="#" class="bio-link-button fade-in" style="animation-delay: 0.6s;">
-                        <div class="w-12 h-12 gradient-teal rounded-full flex items-center justify-center mr-4">
-                            <i class="ri-twitter-line text-white text-xl"></i>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="font-bold text-lg">Follow on Twitter</h3>
-                            <p class="text-sm text-white/70">Daily thoughts & updates</p>
-                        </div>
-                        <div class="text-white/70">
-                            <i class="ri-arrow-right-line text-2xl"></i>
-                        </div>
-                    </a>
-                    
-                    <a href="#" class="bio-link-button fade-in" style="animation-delay: 0.7s;">
-                        <div class="w-12 h-12 bg-blue-700 rounded-full flex items-center justify-center mr-4">
-                            <i class="ri-facebook-line text-white text-xl"></i>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="font-bold text-lg">Facebook Page</h3>
-                            <p class="text-sm text-white/70">Community & updates</p>
-                        </div>
-                        <div class="text-white/70">
-                            <i class="ri-arrow-right-line text-2xl"></i>
-                        </div>
-                    </a>
-                    
-                    <a href="#" class="bio-link-button fade-in" style="animation-delay: 0.8s;">
-                        <div class="w-12 h-12 gradient-orange rounded-full flex items-center justify-center mr-4">
-                            <i class="ri-shopping-bag-line text-white text-xl"></i>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="font-bold text-lg">My Online Store</h3>
-                            <p class="text-sm text-white/70">Curated fashion & beauty items</p>
-                        </div>
-                        <div class="text-white/70">
-                            <i class="ri-arrow-right-line text-2xl"></i>
-                        </div>
-                    </a>
-                    
-                    <a href="#" class="bio-link-button fade-in" style="animation-delay: 0.9s;">
-                        <div class="w-12 h-12 gradient-blue rounded-full flex items-center justify-center mr-4">
-                            <i class="ri-quill-pen-line text-white text-xl"></i>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="font-bold text-lg">Personal Blog</h3>
-                            <p class="text-sm text-white/70">Life stories & inspiration</p>
-                        </div>
-                        <div class="text-white/70">
-                            <i class="ri-arrow-right-line text-2xl"></i>
-                        </div>
-                    </a>
-                    
-                    <a href="#" class="bio-link-button fade-in" style="animation-delay: 1.0s;">
-                        <div class="w-12 h-12 gradient-purple rounded-full flex items-center justify-center mr-4">
-                            <i class="ri-mic-line text-white text-xl"></i>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="font-bold text-lg">My Podcast</h3>
-                            <p class="text-sm text-white/70">Weekly talks on creativity</p>
-                        </div>
-                        <div class="text-white/70">
-                            <i class="ri-arrow-right-line text-2xl"></i>
-                        </div>
-                    </a>
-                    
-                    <a href="#" class="bio-link-button fade-in" style="animation-delay: 1.1s;">
-                        <div class="w-12 h-12 gradient-green rounded-full flex items-center justify-center mr-4">
-                            <i class="ri-mail-line text-white text-xl"></i>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="font-bold text-lg">Weekly Newsletter</h3>
-                            <p class="text-sm text-white/70">Exclusive tips & updates</p>
-                        </div>
-                        <div class="text-white/70">
-                            <i class="ri-arrow-right-line text-2xl"></i>
-                        </div>
-                    </a>
-                    
-                    <a href="#" class="bio-link-button fade-in" style="animation-delay: 1.2s;">
-                        <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mr-4">
-                            <i class="ri-message-3-line text-white text-xl"></i>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="font-bold text-lg">Business Inquiry</h3>
-                            <p class="text-sm text-white/70">Let's collaborate together</p>
-                        </div>
-                        <div class="text-white/70">
-                            <i class="ri-arrow-right-line text-2xl"></i>
-                        </div>
-                    </a>
-                    
-                    <!-- Desktop Footer -->
-                    <div class="text-center mt-8 fade-in" style="animation-delay: 1.4s;">
-                        <p class="text-white/60 text-sm mb-4">
-                            <i class="ri-star-smile-line"></i> Created with love using modern design
-                        </p>
-                        <div class="flex justify-center space-x-6 text-white/50 text-sm">
-                            <span><i class="ri-copyright-line"></i> 2025 Sarah Digital Creator</span>
-                            <span>•</span>
-                            <span>Made with <i class="ri-heart-fill text-red-400"></i></span>
-                        </div>
+                <!-- Slider Controls -->
+                <div class="flex justify-center space-x-4 mt-6">
+                    <button onclick="previousStatSlide()" class="bg-coral-red text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all clickable">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button onclick="nextStatSlide()" class="bg-coral-red text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all clickable">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                
+                <!-- Slider Indicators -->
+                <div class="flex justify-center space-x-2 mt-4">
+                    <div class="stat-indicator w-3 h-3 bg-coral-red rounded-full transition-all active"></div>
+                    <div class="stat-indicator w-3 h-3 bg-gray-300 rounded-full transition-all"></div>
+                    <div class="stat-indicator w-3 h-3 bg-gray-300 rounded-full transition-all"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section - Improved -->
+    <section id="features" class="py-20 bg-gradient-to-br from-pink-50 to-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+                    Kenapa Harus Menggunakan Layanan Kami?
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Berbagai keunggulan yang membuat Confessin menjadi platform terpercaya pilihan jutaan pengguna
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Feature 1: Keamanan -->
+                <div class="feature-card rounded-3xl p-8 shadow-xl text-center card-hover">
+                    <div class="feature-icon-wrapper w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-shield-alt text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Keamanan Terjamin</h3>
+                    <ul class="text-left space-y-3 text-gray-600 mb-6">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                            <span>Enkripsi end-to-end untuk melindungi data</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                            <span>Tidak menyimpan informasi identitas</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                            <span>Server aman dengan sertifikat SSL/TLS</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                            <span>Moderator profesional 24/7</span>
+                        </li>
+                    </ul>
+                    <div class="bg-gradient-to-r from-coral-red to-pink-dark text-white py-3 px-6 rounded-full font-semibold">
+                        100% Anonim & Aman
+                    </div>
+                </div>
+
+                <!-- Feature 2: Interface -->
+                <div class="feature-card rounded-3xl p-8 shadow-xl text-center card-hover">
+                    <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                        <i class="fas fa-mobile-alt text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Interface Mudah</h3>
+                    <ul class="text-left space-y-3 text-gray-600 mb-6">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                            <span>Desain minimalis dan intuitif</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                            <span>Responsif di semua perangkat</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                            <span>Pengiriman hanya 2 langkah mudah</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                            <span>Tema gelap dan terang tersedia</span>
+                        </li>
+                    </ul>
+                    <div class="bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 px-6 rounded-full font-semibold">
+                        Mudah Digunakan
+                    </div>
+                </div>
+
+                <!-- Feature 3: Respon -->
+                <div class="feature-card rounded-3xl p-8 shadow-xl text-center card-hover">
+                    <div class="w-20 h-20 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                        <i class="fas fa-bolt text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Respon Super Cepat</h3>
+                    <ul class="text-left space-y-3 text-gray-600 mb-6">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                            <span>Pengiriman dalam hitungan detik</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                            <span>Notifikasi real-time status</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                            <span>Uptime 99.9% keandalan maksimal</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                            <span>Customer service 24/7</span>
+                        </li>
+                    </ul>
+                    <div class="bg-gradient-to-r from-green-500 to-green-600 text-white py-3 px-6 rounded-full font-semibold">
+                        Super Cepat
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <script>
-        // Typing effect for the subtitle
-        const typingTexts = document.querySelectorAll('.typing-text');
-        const titles = ['Content Creator & Influencer', 'Digital Marketing Expert', 'Creative Storyteller', 'Brand Collaborator'];
-        let titleIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        
-        function typeWriter() {
-            const currentTitle = titles[titleIndex];
+    </section>
+
+    <!-- Documentation Section - 2 Steps -->
+    <section id="documentation" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+                    Cara Penggunaan Bot
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Hanya 2 langkah mudah untuk mengirim confess dengan bot kami
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                <!-- Step 1 -->
+                <div class="documentation-card bg-white rounded-3xl p-8 shadow-xl">
+                    <div class="text-center mb-6">
+                        <div class="w-24 h-24 bg-gradient-to-r from-coral-red to-pink-dark rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-3xl font-bold">1</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Buka Bot & Pilih Target</h3>
+                    </div>
+                    <div class="bg-gray-100 rounded-2xl p-6 mb-6 text-center">
+                        <!-- Placeholder untuk gambar step 1 -->
+                        <div class="w-full h-64 bg-gradient-to-br from-gray-200 to-gray-300 rounded-lg flex flex-col items-center justify-center">
+                            <i class="fas fa-image text-gray-500 text-4xl mb-2"></i>
+                            <p class="text-gray-500 font-medium">Gambar Step 1</p>
+                            <p class="text-gray-400 text-sm">Silakan upload gambar Anda</p>
+                        </div>
+                    </div>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="flex items-start">
+                            <i class="fas fa-arrow-right text-coral-red mt-1 mr-3 flex-shrink-0"></i>
+                            <span>Buka bot Confessin di Telegram</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-arrow-right text-coral-red mt-1 mr-3 flex-shrink-0"></i>
+                            <span>Pilih platform target (Instagram, Twitter, dll)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-arrow-right text-coral-red mt-1 mr-3 flex-shrink-0"></i>
+                            <span>Masukkan username target dengan benar</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="documentation-card bg-white rounded-3xl p-8 shadow-xl">
+                    <div class="text-center mb-6">
+                        <div class="w-24 h-24 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-3xl font-bold">2</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Tulis & Kirim Confess</h3>
+                    </div>
+                    <div class="bg-gray-100 rounded-2xl p-6 mb-6 text-center">
+                        <!-- Placeholder untuk gambar step 2 -->
+                        <div class="w-full h-64 bg-gradient-to-br from-gray-200 to-gray-300 rounded-lg flex flex-col items-center justify-center">
+                            <i class="fas fa-image text-gray-500 text-4xl mb-2"></i>
+                            <p class="text-gray-500 font-medium">Gambar Step 2</p>
+                            <p class="text-gray-400 text-sm">Silakan upload gambar Anda</p>
+                        </div>
+                    </div>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="flex items-start">
+                            <i class="fas fa-arrow-right text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                            <span>Tulis pesan confess yang ingin dikirim</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-arrow-right text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                            <span>Klik tombol "Kirim Confess"</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-arrow-right text-green-500 mt-1 mr-3 flex-shrink-0"></i>
+                            <span>Tunggu konfirmasi pengiriman berhasil</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <button onclick="startConfess()" class="bg-gradient-to-r from-coral-red to-pink-dark text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl transition-all hover:scale-105 clickable">
+                    <i class="fas fa-rocket mr-2"></i>
+                    Mulai Kirim Confess Sekarang
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+                    Testimoni Pengguna
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Ribuan pengguna telah mempercayai layanan kami untuk berbagi cerita mereka
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card rounded-3xl p-8 shadow-xl border-l-4 border-coral-red">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-r from-coral-red to-pink-dark rounded-full flex items-center justify-center">
+                            <i class="fas fa-user text-white"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-bold text-gray-800">Sarah K.</h4>
+                            <p class="text-gray-500 text-sm">Mahasiswa</p>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex text-yellow-400 mb-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-gray-600 italic">
+                            "Platform yang sangat membantu! Akhirnya bisa cerita tanpa khawatir identitas ketahuan. Interface-nya juga mudah banget dipakai."
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card rounded-3xl p-8 shadow-xl border-l-4 border-blue-500">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center">
+                            <i class="fas fa-user text-white"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-bold text-gray-800">Andi R.</h4>
+                            <p class="text-gray-500 text-sm">Karyawan Swasta</p>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex text-yellow-400 mb-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-gray-600 italic">
+                            "Keren banget! Confess langsung terkirim dan aman. Customer servicenya juga responsif kalau ada masalah. Recommended!"
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card rounded-3xl p-8 shadow-xl border-l-4 border-green-500">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center">
+                            <i class="fas fa-user text-white"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-bold text-gray-800">Maya L.</h4>
+                            <p class="text-gray-500 text-sm">Freelancer</p>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex text-yellow-400 mb-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-gray-600 italic">
+                            "Sudah pakai dari tahun lalu dan selalu puas! Privasi terjaga, pengiriman cepat, dan yang penting gratis!"
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <button onclick="viewAllTestimonials()" class="bg-gradient-to-r from-gray-600 to-gray-700 text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl transition-all hover:scale-105 clickable">
+                    <i class="fas fa-eye mr-2"></i>
+                    Lihat Semua Testimoni
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <!-- Logo & Description -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="w-12 h-12 bg-coral-red rounded-full flex items-center justify-center">
+                            <i class="fas fa-heart text-white text-lg"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-2xl font-bold">Confessin</h4>
+                            <p class="text-gray-400 text-sm">Platform Confess Terpercaya</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 leading-relaxed mb-6 max-w-md">
+                        Platform terpercaya untuk berbagi confess secara anonim. Ceritakan apa yang ada di hatimu dengan aman dan nyaman.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-coral-red transition-all clickable">
+                            <i class="fab fa-instagram text-white"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-coral-red transition-all clickable">
+                            <i class="fab fa-twitter text-white"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-coral-red transition-all clickable">
+                            <i class="fab fa-telegram text-white"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-coral-red transition-all clickable">
+                            <i class="fab fa-whatsapp text-white"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h5 class="text-xl font-bold mb-6">Quick Links</h5>
+                    <ul class="space-y-3">
+                        <li><a href="#statistics" class="text-gray-300 hover:text-white transition-all clickable">Statistik</a></li>
+                        <li><a href="#features" class="text-gray-300 hover:text-white transition-all clickable">Fitur</a></li>
+                        <li><a href="#documentation" class="text-gray-300 hover:text-white transition-all clickable">Panduan</a></li>
+                        <li><a href="#testimonials" class="text-gray-300 hover:text-white transition-all clickable">Testimoni</a></li>
+                    </ul>
+                </div>
+
+                <!-- Support -->
+                <div>
+                    <h5 class="text-xl font-bold mb-6">Support</h5>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all clickable">FAQ</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all clickable">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all clickable">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-all clickable">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
             
-            typingTexts.forEach(element => {
-                if (isDeleting) {
-                    element.textContent = currentTitle.substring(0, charIndex - 1);
-                } else {
-                    element.textContent = currentTitle.substring(0, charIndex + 1);
+            <div class="border-t border-gray-800 pt-8 mt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm mb-4 md:mb-0">
+                        © 2025 PT. Kreasi Digitalindo. Made with ❤️ for our amazing users
+                    </p>
+                    <div class="flex space-x-6 text-sm text-gray-400">
+                        <span>Server Status: <span class="text-green-400">Online</span></span>
+                        <span>Uptime: <span class="text-green-400">99.9%</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Global variables
+        let currentStatSlide = 0;
+        let isMobileMenuOpen = false;
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const icon = document.getElementById('mobileMenuIcon');
+            
+            isMobileMenuOpen = !isMobileMenuOpen;
+            
+            if (isMobileMenuOpen) {
+                mobileMenu.classList.add('active');
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                mobileMenu.classList.remove('active');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        }
+
+        // Scroll functions
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        function scrollToFeatures() {
+            const featuresSection = document.getElementById('features');
+            featuresSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+
+        // Statistics counter animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.count-animation');
+            
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-count'));
+                const increment = target / 100;
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        counter.textContent = target.toLocaleString();
+                        clearInterval(timer);
+                    } else {
+                        counter.textContent = Math.ceil(current).toLocaleString();
+                    }
+                }, 20);
+            });
+        }
+
+        // Statistics Slider Functions
+        function nextStatSlide() {
+            const track = document.getElementById('statSliderTrack');
+            const indicators = document.querySelectorAll('.stat-indicator');
+            
+            indicators[currentStatSlide].classList.remove('bg-coral-red');
+            indicators[currentStatSlide].classList.add('bg-gray-300');
+            
+            currentStatSlide = (currentStatSlide + 1) % 3;
+            
+            indicators[currentStatSlide].classList.remove('bg-gray-300');
+            indicators[currentStatSlide].classList.add('bg-coral-red');
+            
+            track.style.transform = `translateX(-${currentStatSlide * 33.333}%)`;
+        }
+
+        function previousStatSlide() {
+            const track = document.getElementById('statSliderTrack');
+            const indicators = document.querySelectorAll('.stat-indicator');
+            
+            indicators[currentStatSlide].classList.remove('bg-coral-red');
+            indicators[currentStatSlide].classList.add('bg-gray-300');
+            
+            currentStatSlide = currentStatSlide === 0 ? 2 : currentStatSlide - 1;
+            
+            indicators[currentStatSlide].classList.remove('bg-gray-300');
+            indicators[currentStatSlide].classList.add('bg-coral-red');
+            
+            track.style.transform = `translateX(-${currentStatSlide * 33.333}%)`;
+        }
+
+        // Action functions
+        function startConfess() {
+            alert('Fitur ini akan mengarahkan ke halaman confess. Implementasi sesuai kebutuhan sistem Anda.');
+            // window.location.href = '/confess';
+        }
+
+        function viewAllTestimonials() {
+            alert('Fitur ini akan mengarahkan ke halaman testimoni lengkap. Implementasi sesuai kebutuhan sistem Anda.');
+            // window.location.href = '/testimonials';
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    // Account for fixed header height
+                    const headerHeight = 80;
+                    const targetPosition = target.offsetTop - headerHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (isMobileMenuOpen) {
+                        toggleMobileMenu();
+                    }
                 }
             });
-            
-            if (isDeleting) {
-                charIndex--;
-            } else {
-                charIndex++;
-            }
-            
-            if (!isDeleting && charIndex === currentTitle.length) {
-                setTimeout(() => isDeleting = true, 2000);
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                titleIndex = (titleIndex + 1) % titles.length;
-            }
-            
-            const speed = isDeleting ? 50 : 100;
-            setTimeout(typeWriter, speed);
-        }
-        
-        // Start typing effect after page loads
-        setTimeout(typeWriter, 1000);
-        
-        // Intersection Observer for fade-in animations
+        });
+
+        // Add click animations
+        document.querySelectorAll('.clickable').forEach(element => {
+            element.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+
+        // Intersection Observer for animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
         };
-        
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.animationPlayState = 'running';
+                    if (entry.target.id === 'statistics') {
+                        animateCounters();
+                    }
+                    entry.target.classList.add('fade-in-up');
                 }
             });
         }, observerOptions);
-        
-        // Observe all fade-in elements
-        document.querySelectorAll('.fade-in').forEach(el => {
-            el.style.animationPlayState = 'paused';
-            observer.observe(el);
+
+        // Observe sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
         });
-        
-        // Add click effects to bio links
-        document.querySelectorAll('.bio-link-button').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                // Create ripple effect
-                const ripple = document.createElement('div');
-                ripple.style.position = 'absolute';
-                ripple.style.borderRadius = '50%';
-                ripple.style.background = 'rgba(255, 255, 255, 0.5)';
-                ripple.style.transform = 'scale(0)';
-                ripple.style.animation = 'ripple 0.6s linear';
-                ripple.style.left = '50%';
-                ripple.style.top = '50%';
-                ripple.style.width = '20px';
-                ripple.style.height = '20px';
-                ripple.style.marginLeft = '-10px';
-                ripple.style.marginTop = '-10px';
-                
-                this.appendChild(ripple);
-                
-                setTimeout(() => {
-                    ripple.remove();
-                }, 600);
-                
-                // Simulate navigation (replace with actual links)
-                setTimeout(() => {
-                    alert('Navigating to: ' + this.querySelector('h3').textContent);
-                }, 300);
-            });
-        });
-        
-        // Track bio link clicks (for analytics)
-        let clickCount = 0;
-        document.querySelectorAll('.bio-link-button').forEach((button, index) => {
-            button.addEventListener('click', () => {
-                clickCount++;
-                console.log(`Bio link ${index + 1} clicked. Total clicks: ${clickCount}`);
-            });
-        });
-        
-        // Smooth scrolling behavior
+
+        // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
-            // Add smooth scroll behavior
-            document.documentElement.style.scrollBehavior = 'smooth';
+            // Add scroll event for header behavior
+            let lastScrollTop = 0;
+            let isScrolling = false;
             
-            // Performance optimization for mobile
-            if (window.innerWidth <= 768) {
-                // Reduce animation complexity on mobile
-                document.querySelectorAll('.bio-link-button').forEach(button => {
-                    button.style.transition = 'all 0.3s ease';
-                });
-            }
-        });
-        
-        // Resize handler for responsive behavior
-        window.addEventListener('resize', function() {
-            // Handle responsive changes if needed
-            const isMobile = window.innerWidth <= 768;
-            const bioButtons = document.querySelectorAll('.bio-link-button');
-            
-            bioButtons.forEach(button => {
-                if (isMobile) {
-                    button.style.transition = 'all 0.3s ease';
-                } else {
-                    button.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+            window.addEventListener('scroll', function() {
+                if (!isScrolling) {
+                    window.requestAnimationFrame(function() {
+                        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                        const header = document.querySelector('header');
+                        
+                        if (scrollTop > lastScrollTop && scrollTop > 100) {
+                            // Scrolling down
+                            header.classList.add('navbar-hidden');
+                        } else {
+                            // Scrolling up
+                            header.classList.remove('navbar-hidden');
+                        }
+                        lastScrollTop = scrollTop;
+                        isScrolling = false;
+                    });
+                    isScrolling = true;
                 }
             });
+            
+            // Auto-advance statistics slider every 4 seconds (mobile only)
+            if (window.innerWidth < 768) {
+                setInterval(() => {
+                    nextStatSlide();
+                }, 4000);
+            }
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuBtn = event.target.closest('button[onclick="toggleMobileMenu()"]');
+            
+            if (isMobileMenuOpen && !mobileMenu.contains(event.target) && !mobileMenuBtn) {
+                toggleMobileMenu();
+            }
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth >= 768 && isMobileMenuOpen) {
+                toggleMobileMenu();
+            }
         });
     </script>
 </body>
-    </html>
+</html>
