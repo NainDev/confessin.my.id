@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konverter Nomor HP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#6366f1',
+                        'primary-dark': '#4f46e5',
+                        'primary-light': '#818cf8'
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .glass-nav {
+            background: rgba(99, 102, 241, 0.9);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in { animation: fadeInUp 0.5s ease-out forwards; }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-10px); }
+            to   { opacity: 1; transform: translateX(0); }
+        }
+
+        .number-item {
+            animation: slideIn 0.25s ease-out forwards;
+        }
+
+        .counter-badge {
+            background: linear-gradient(135deg, #6366f1, #764ba2);
+        }
+
+        .copy-btn:active { transform: scale(0.95); }
+
+        textarea {
+            resize: vertical;
+            min-height: 200px;
+        }
+
+        textarea::placeholder { color: rgba(255,255,255,0.45); }
+
+        /* Scrollbar for results */
+        #resultList::-webkit-scrollbar { width: 6px; }
+        #resultList::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+        #resultList::-webkit-scrollbar-thumb { background: #6366f1; border-radius: 10px; }
+
+        .toast {
+            position: fixed;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 9999;
+            pointer-events: none;
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .progress-bar-fill {
+            transition: width 0.4s ease;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="glass-nav fixed top-0 left-0 right-0 z-50 shadow-xl border-b border-white/10">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+                        <i class="fas fa-phone text-primary text-lg"></i>
+                    </div>
+                    <span class="text-white text-xl font-bold">Konverter Nomor HP</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span id="navCounter" class="hidden bg-white/20 text-white text-sm font-semibold px-3 py-1 rounded-full">
+                        <i class="fas fa-list mr-1"></i><span id="navCount">0</span> nomor
+                    </span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="pt-28 pb-10 gradient-bg relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-10 left-10 w-72 h-72 bg-white rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 right-10 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+        </div>
+        <div class="container mx-auto px-6 relative z-10 text-center animate-fade-in">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-3">
+                <i class="fas fa-mobile-alt text-yellow-300 mr-3"></i>Konverter Nomor HP
+            </h1>
+            <p class="text-purple-100 text-lg max-w-2xl mx-auto mb-6">
+                Konversi format nomor telepon apapun menjadi format standar internasional (tanpa tanda baca).<br>
+                Masukkan hingga <strong class="text-yellow-300">500 nomor</strong> sekaligus, lalu salin atau unduh hasilnya.
+            </p>
+
+            <!-- Stat cards -->
+            <div class="flex flex-wrap justify-center gap-4 mt-6">
+                <div class="stat-card rounded-xl px-6 py-3 text-white text-sm font-medium">
+                    <i class="fas fa-bolt text-yellow-300 mr-2"></i>Konversi Instan
+                </div>
+                <div class="stat-card rounded-xl px-6 py-3 text-white text-sm font-medium">
+                    <i class="fas fa-list-ol text-yellow-300 mr-2"></i>Maks. 500 Nomor
+                </div>
+                <div class="stat-card rounded-xl px-6 py-3 text-white text-sm font-medium">
+                    <i class="fas fa-download text-yellow-300 mr-2"></i>Download TXT/CSV
+                </div>
+                <div class="stat-card rounded-xl px-6 py-3 text-white text-sm font-medium">
+                    <i class="fas fa-copy text-yellow-300 mr-2"></i>Salin Semua
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="py-10">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-8">
+
+                <!-- Input Panel -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div class="gradient-bg px-6 py-4">
+                        <div class="flex items-center justify-between">
+                            <h2 class="text-white font-bold text-lg">
+                                <i class="fas fa-keyboard mr-2"></i>Input Nomor
+                            </h2>
+                            <span id="inputCounter" class="bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full">0 / 500</span>
+                        </div>
+                        <p class="text-purple-100 text-xs mt-1">Satu nomor per baris. Mendukung format: +62, 0, 62, dengan spasi/dash</p>
+                    </div>
+
+                    <div class="p-6">
+                        <!-- Format examples -->
+                        <div class="mb-4 p-3 bg-indigo-50 rounded-xl border border-indigo-100">
+                            <p class="text-xs font-semibold text-indigo-700 mb-2"><i class="fas fa-info-circle mr-1"></i>Format yang didukung:</p>
+                            <div class="grid grid-cols-2 gap-1 text-xs text-indigo-600">
+                                <span><i class="fas fa-check text-green-500 mr-1"></i>+62 882-2367-4569</span>
+                                <span><i class="fas fa-check text-green-500 mr-1"></i>0882 2367 4569</span>
+                                <span><i class="fas fa-check text-green-500 mr-1"></i>62882-2367-4569</span>
+                                <span><i class="fas fa-check text-green-500 mr-1"></i>08822367456</span>
+                                <span><i class="fas fa-check text-green-500 mr-1"></i>+62882.2367.4569</span>
+                                <span><i class="fas fa-check text-green-500 mr-1"></i>+62 (882) 2367-4569</span>
+                            </div>
+                        </div>
+
+                        <textarea
+                            id="inputNumbers"
+                            class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-primary focus:outline-none text-gray-700 text-sm font-mono leading-relaxed"
+                            placeholder="+62 882-2367-4569&#10;0812 3456 7890&#10;62813-4567-8901&#10;..."
+                            oninput="handleInput()"
+                            style="min-height:260px;"
+                        ></textarea>
+
+                        <!-- Progress bar -->
+                        <div class="mt-3 mb-4">
+                            <div class="flex justify-between text-xs text-gray-500 mb-1">
+                                <span id="progressLabel">0 nomor terdeteksi</span>
+                                <span id="progressPercent">0%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div id="progressBar" class="progress-bar-fill bg-gradient-to-r from-indigo-500 to-purple-500 h-2 rounded-full" style="width:0%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="flex gap-3 flex-wrap">
+                            <button onclick="convertNumbers()" class="flex-1 gradient-bg text-white py-3 rounded-xl font-semibold hover:opacity-90 transition-all transform hover:scale-105 shadow-md min-w-[140px]">
+                                <i class="fas fa-magic mr-2"></i>Konversi Sekarang
+                            </button>
+                            <button onclick="clearInput()" class="bg-gray-100 text-gray-600 py-3 px-5 rounded-xl font-semibold hover:bg-gray-200 transition-colors">
+                                <i class="fas fa-trash-alt mr-1"></i>Hapus
+                            </button>
+                            <button onclick="loadSample()" class="bg-indigo-50 text-primary py-3 px-5 rounded-xl font-semibold hover:bg-indigo-100 transition-colors">
+                                <i class="fas fa-file-alt mr-1"></i>Contoh
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Output Panel -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div class="gradient-bg px-6 py-4">
+                        <div class="flex items-center justify-between">
+                            <h2 class="text-white font-bold text-lg">
+                                <i class="fas fa-check-circle mr-2"></i>Hasil Konversi
+                            </h2>
+                            <span id="resultCounter" class="bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full">0 nomor</span>
+                        </div>
+                        <p class="text-purple-100 text-xs mt-1">Nomor siap digunakan — format bersih tanpa tanda baca</p>
+                    </div>
+
+                    <div class="p-6">
+                        <!-- Action buttons -->
+                        <div class="flex gap-2 mb-4 flex-wrap">
+                            <button onclick="copyAll()" id="btnCopyAll" class="copy-btn flex-1 bg-primary text-white py-2.5 px-4 rounded-xl font-semibold hover:bg-primary-dark transition-all shadow-sm text-sm min-w-[120px]" disabled>
+                                <i class="fas fa-copy mr-2"></i>Salin Semua
+                            </button>
+                            <button onclick="downloadTxt()" id="btnDownloadTxt" class="copy-btn bg-green-500 text-white py-2.5 px-4 rounded-xl font-semibold hover:bg-green-600 transition-all shadow-sm text-sm" disabled>
+                                <i class="fas fa-download mr-1"></i>TXT
+                            </button>
+                            <button onclick="downloadCsv()" id="btnDownloadCsv" class="copy-btn bg-emerald-500 text-white py-2.5 px-4 rounded-xl font-semibold hover:bg-emerald-600 transition-all shadow-sm text-sm" disabled>
+                                <i class="fas fa-file-csv mr-1"></i>CSV
+                            </button>
+                            <button onclick="clearResult()" id="btnClearResult" class="bg-gray-100 text-gray-600 py-2.5 px-4 rounded-xl font-semibold hover:bg-gray-200 transition-colors text-sm" disabled>
+                                <i class="fas fa-times mr-1"></i>Reset
+                            </button>
+                        </div>
+
+                        <!-- Stats row -->
+                        <div id="statsRow" class="hidden grid grid-cols-3 gap-3 mb-4">
+                            <div class="bg-green-50 rounded-xl p-3 text-center border border-green-100">
+                                <p class="text-2xl font-bold text-green-600" id="statValid">0</p>
+                                <p class="text-xs text-green-600 font-medium">Valid</p>
+                            </div>
+                            <div class="bg-red-50 rounded-xl p-3 text-center border border-red-100">
+                                <p class="text-2xl font-bold text-red-500" id="statInvalid">0</p>
+                                <p class="text-xs text-red-500 font-medium">Tidak Valid</p>
+                            </div>
+                            <div class="bg-indigo-50 rounded-xl p-3 text-center border border-indigo-100">
+                                <p class="text-2xl font-bold text-primary" id="statTotal">0</p>
+                                <p class="text-xs text-primary font-medium">Total Input</p>
+                            </div>
+                        </div>
+
+                        <!-- Empty state -->
+                        <div id="emptyState" class="flex flex-col items-center justify-center py-16 text-gray-400">
+                            <div class="w-20 h-20 bg-indigo-50 rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-phone-alt text-3xl text-indigo-300"></i>
+                            </div>
+                            <p class="text-base font-medium text-gray-500">Hasil konversi muncul di sini</p>
+                            <p class="text-sm mt-1">Masukkan nomor di panel kiri lalu klik Konversi</p>
+                        </div>
+
+                        <!-- Result list -->
+                        <div id="resultList" class="hidden space-y-2 overflow-y-auto" style="max-height: 380px;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- How to use -->
+            <div class="mt-10 bg-white rounded-2xl shadow-lg p-8">
+                <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">
+                    <i class="fas fa-question-circle text-primary mr-2"></i>Cara Penggunaan
+                </h3>
+                <div class="grid md:grid-cols-4 gap-6">
+                    <div class="text-center">
+                        <div class="w-16 h-16 gradient-bg rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-lg">
+                            <span class="text-white font-bold text-2xl">1</span>
+                        </div>
+                        <h4 class="font-bold text-gray-800 mb-1">Masukkan Nomor</h4>
+                        <p class="text-gray-500 text-sm">Ketik atau tempel nomor telepon, satu per baris (maks. 500)</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 gradient-bg rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-lg">
+                            <span class="text-white font-bold text-2xl">2</span>
+                        </div>
+                        <h4 class="font-bold text-gray-800 mb-1">Klik Konversi</h4>
+                        <p class="text-gray-500 text-sm">Tekan tombol "Konversi Sekarang" untuk memproses semua nomor</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 gradient-bg rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-lg">
+                            <span class="text-white font-bold text-2xl">3</span>
+                        </div>
+                        <h4 class="font-bold text-gray-800 mb-1">Cek Hasil</h4>
+                        <p class="text-gray-500 text-sm">Lihat nomor yang valid dan tidak valid beserta statistiknya</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 gradient-bg rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-lg">
+                            <span class="text-white font-bold text-2xl">4</span>
+                        </div>
+                        <h4 class="font-bold text-gray-800 mb-1">Salin / Unduh</h4>
+                        <p class="text-gray-500 text-sm">Salin semua nomor atau unduh sebagai file TXT / CSV</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 mt-10">
+        <div class="container mx-auto px-6 text-center">
+            <div class="flex items-center justify-center space-x-3 mb-3">
+                <div class="w-9 h-9 bg-primary rounded-full flex items-center justify-center">
+                    <i class="fas fa-phone text-white text-sm"></i>
+                </div>
+                <span class="text-xl font-bold">Konverter Nomor HP</span>
+            </div>
+            <p class="text-gray-400 text-sm">Konversi cepat & mudah — mendukung semua format nomor telepon Indonesia</p>
+            <p class="text-gray-500 text-xs mt-3">&copy; 2025 Nain Nadika. Dibuat dengan <i class="fas fa-heart text-red-500 mx-1"></i>dan kopi</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <div class="bg-gray-900 text-white px-6 py-3 rounded-full shadow-xl flex items-center gap-2 text-sm font-medium">
+            <i id="toastIcon" class="fas fa-check-circle text-green-400"></i>
+            <span id="toastMsg">Berhasil disalin!</span>
+        </div>
+    </div>
+
+    <script>
+        const MAX_NUMBERS = 500;
+        let convertedNumbers = [];
+        let invalidNumbers = [];
+
+        // ─── Input handler ───────────────────────────────────────────────
+        function handleInput() {
+            const lines = getLines();
+            const count = Math.min(lines.length, MAX_NUMBERS);
+            const pct = Math.round((count / MAX_NUMBERS) * 100);
+
+            document.getElementById('inputCounter').textContent = `${count} / ${MAX_NUMBERS}`;
+            document.getElementById('progressLabel').textContent = `${count} nomor terdeteksi`;
+            document.getElementById('progressPercent').textContent = `${pct}%`;
+            document.getElementById('progressBar').style.width = `${pct}%`;
+
+            // Warn if over limit
+            const ta = document.getElementById('inputNumbers');
+            if (lines.length > MAX_NUMBERS) {
+                ta.style.borderColor = '#ef4444';
+                document.getElementById('inputCounter').textContent = `⚠️ ${lines.length} / 500 — terpotong`;
+            } else {
+                ta.style.borderColor = '';
+            }
+        }
+
+        function getLines() {
+            return document.getElementById('inputNumbers').value
+                .split('\n')
+                .map(l => l.trim())
+                .filter(l => l.length > 0);
+        }
+
+        // ─── Converter logic ─────────────────────────────────────────────
+        function convertPhone(raw) {
+            // Strip everything except digits and leading +
+            let num = raw.replace(/[\s\-\.\(\)]/g, '');
+
+            // Remove leading +
+            if (num.startsWith('+')) num = num.slice(1);
+
+            // Normalize to 62...
+            if (num.startsWith('0')) {
+                num = '62' + num.slice(1);
+            } else if (!num.startsWith('62')) {
+                // try to detect if it looks like a local number
+                if (/^8[0-9]{7,12}$/.test(num)) {
+                    num = '62' + num;
+                }
+            }
+
+            // Final validation: must be 62 followed by 8-13 digits
+            if (/^62[0-9]{8,13}$/.test(num)) {
+                return { valid: true, number: num };
+            }
+            return { valid: false, number: num || raw };
+        }
+
+        function convertNumbers() {
+            const lines = getLines().slice(0, MAX_NUMBERS);
+
+            if (lines.length === 0) {
+                showToast('Masukkan setidaknya satu nomor!', 'warning');
+                return;
+            }
+
+            convertedNumbers = [];
+            invalidNumbers = [];
+
+            lines.forEach(line => {
+                const result = convertPhone(line);
+                if (result.valid) {
+                    convertedNumbers.push({ original: line, converted: result.number });
+                } else {
+                    invalidNumbers.push({ original: line, converted: result.number });
+                }
+            });
+
+            renderResults();
+        }
+
+        // ─── Render ───────────────────────────────────────────────────────
+        function renderResults() {
+            const listEl = document.getElementById('resultList');
+            const emptyEl = document.getElementById('emptyState');
+            const statsRow = document.getElementById('statsRow');
+
+            const total = convertedNumbers.length + invalidNumbers.length;
+
+            // stats
+            document.getElementById('statValid').textContent = convertedNumbers.length;
+            document.getElementById('statInvalid').textContent = invalidNumbers.length;
+            document.getElementById('statTotal').textContent = total;
+            document.getElementById('resultCounter').textContent = `${convertedNumbers.length} nomor valid`;
+            updateNavCounter(convertedNumbers.length);
+
+            listEl.innerHTML = '';
+
+            if (total === 0) {
+                emptyEl.classList.remove('hidden');
+                listEl.classList.add('hidden');
+                statsRow.classList.add('hidden');
+                setActionButtons(false);
+                return;
+            }
+
+            emptyEl.classList.add('hidden');
+            listEl.classList.remove('hidden');
+            statsRow.classList.remove('grid');
+            statsRow.classList.remove('hidden');
+            statsRow.classList.add('grid');
+            setActionButtons(convertedNumbers.length > 0);
+
+            // Valid numbers
+            convertedNumbers.forEach((item, i) => {
+                const div = document.createElement('div');
+                div.className = 'number-item flex items-center justify-between bg-green-50 border border-green-100 rounded-xl px-4 py-3 group';
+                div.style.animationDelay = `${i * 15}ms`;
+                div.innerHTML = `
+                    <div class="flex items-center gap-3 overflow-hidden">
+                        <div class="w-7 h-7 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-check text-white text-xs"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <p class="font-bold text-gray-800 font-mono text-sm truncate">${item.converted}</p>
+                            <p class="text-xs text-gray-400 truncate">${item.original}</p>
+                        </div>
+                    </div>
+                    <button onclick="copySingle('${item.converted}')" class="flex-shrink-0 ml-2 opacity-0 group-hover:opacity-100 transition-opacity bg-green-500 text-white px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-green-600">
+                        <i class="fas fa-copy mr-1"></i>Salin
+                    </button>
+                `;
+                listEl.appendChild(div);
+            });
+
+            // Invalid numbers
+            if (invalidNumbers.length > 0) {
+                const sep = document.createElement('div');
+                sep.className = 'flex items-center gap-2 my-2';
+                sep.innerHTML = `<div class="flex-1 h-px bg-red-200"></div><span class="text-xs text-red-400 font-medium">Tidak Valid (${invalidNumbers.length})</span><div class="flex-1 h-px bg-red-200"></div>`;
+                listEl.appendChild(sep);
+
+                invalidNumbers.forEach((item, i) => {
+                    const div = document.createElement('div');
+                    div.className = 'number-item flex items-center gap-3 bg-red-50 border border-red-100 rounded-xl px-4 py-3';
+                    div.innerHTML = `
+                        <div class="w-7 h-7 bg-red-400 rounded-full flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-times text-white text-xs"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <p class="font-bold text-red-600 font-mono text-sm truncate">${item.original}</p>
+                            <p class="text-xs text-gray-400">Format tidak dikenali</p>
+                        </div>
+                    `;
+                    listEl.appendChild(div);
+                });
+            }
+
+            showToast(`✅ ${convertedNumbers.length} nomor berhasil dikonversi!`, 'success');
+        }
+
+        // ─── Actions ──────────────────────────────────────────────────────
+        function copyAll() {
+            if (!convertedNumbers.length) return;
+            const text = convertedNumbers.map(n => n.converted).join('\n');
+            navigator.clipboard.writeText(text).then(() => {
+                showToast(`${convertedNumbers.length} nomor disalin ke clipboard!`, 'success');
+            });
+        }
+
+        function copySingle(num) {
+            navigator.clipboard.writeText(num).then(() => {
+                showToast(`${num} disalin!`, 'success');
+            });
+        }
+
+        function downloadTxt() {
+            if (!convertedNumbers.length) return;
+            const text = convertedNumbers.map(n => n.converted).join('\n');
+            downloadFile(text, 'nomor-konversi.txt', 'text/plain');
+            showToast('File TXT berhasil diunduh!', 'success');
+        }
+
+        function downloadCsv() {
+            if (!convertedNumbers.length) return;
+            const rows = ['No,Nomor Asli,Nomor Konversi'];
+            convertedNumbers.forEach((n, i) => {
+                rows.push(`${i+1},"${n.original}","${n.converted}"`);
+            });
+            downloadFile(rows.join('\n'), 'nomor-konversi.csv', 'text/csv');
+            showToast('File CSV berhasil diunduh!', 'success');
+        }
+
+        function downloadFile(content, filename, type) {
+            const blob = new Blob([content], { type });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function clearInput() {
+            document.getElementById('inputNumbers').value = '';
+            handleInput();
+        }
+
+        function clearResult() {
+            convertedNumbers = [];
+            invalidNumbers = [];
+            document.getElementById('resultList').innerHTML = '';
+            document.getElementById('resultList').classList.add('hidden');
+            document.getElementById('emptyState').classList.remove('hidden');
+            document.getElementById('statsRow').classList.add('hidden');
+            document.getElementById('statsRow').classList.remove('grid');
+            document.getElementById('resultCounter').textContent = '0 nomor';
+            updateNavCounter(0);
+            setActionButtons(false);
+        }
+
+        function loadSample() {
+            const samples = [
+                '+62 882-2367-4569',
+                '0812 3456 7890',
+                '62813-4567-8901',
+                '+62 (822) 1234-5678',
+                '085678901234',
+                '+62 877.1234.5678',
+                '0838 7460 7050',
+                '+6281234567890',
+                '08123456789',
+                '62 821 9876 5432',
+            ];
+            document.getElementById('inputNumbers').value = samples.join('\n');
+            handleInput();
+            showToast('Contoh nomor dimuat!', 'info');
+        }
+
+        // ─── Helpers ──────────────────────────────────────────────────────
+        function setActionButtons(enabled) {
+            ['btnCopyAll','btnDownloadTxt','btnDownloadCsv','btnClearResult'].forEach(id => {
+                const btn = document.getElementById(id);
+                btn.disabled = !enabled;
+                btn.style.opacity = enabled ? '1' : '0.5';
+                btn.style.cursor = enabled ? 'pointer' : 'not-allowed';
+            });
+        }
+
+        function updateNavCounter(count) {
+            const nc = document.getElementById('navCounter');
+            const nd = document.getElementById('navCount');
+            nd.textContent = count;
+            count > 0 ? nc.classList.remove('hidden') : nc.classList.add('hidden');
+        }
+
+        let toastTimeout;
+        function showToast(msg, type = 'success') {
+            clearTimeout(toastTimeout);
+            const toast = document.getElementById('toast');
+            const icon = document.getElementById('toastIcon');
+            const msgEl = document.getElementById('toastMsg');
+
+            msgEl.textContent = msg;
+            icon.className = 'fas ' + (
+                type === 'success' ? 'fa-check-circle text-green-400' :
+                type === 'warning' ? 'fa-exclamation-triangle text-yellow-400' :
+                'fa-info-circle text-blue-400'
+            );
+
+            toast.classList.add('show');
+            toastTimeout = setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // Init
+        setActionButtons(false);
+    </script>
+</body>
+</html>
