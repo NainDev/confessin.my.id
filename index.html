@@ -1,970 +1,1376 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confessin - Platform Confess Terpercaya</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="shortcut icon" href="https://files.catbox.moe/yw1vlz.jpg" type="image/x-icon" />
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'pastel-pink': '#FADADD',
-                        'coral-red': '#E95A6B',
-                        'pink-light': '#ffe0e0',
-                        'pink-dark': '#c4485a'
-                    },
-                    fontFamily: {
-                        'poppins': ['Poppins', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(to bottom, #FADADD 0%, #ffffff 100%);
-        }
-        
-        .gradient-bg {
-            background: linear-gradient(135deg, #E95A6B 0%, #c4485a 100%);
-        }
-        
-        .card-hover {
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-        
-        .card-hover:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 25px 50px rgba(233, 90, 107, 0.25);
-        }
-        
-        .hero-pattern {
-            background-image: 
-                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.2) 2px, transparent 2px),
-                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-            background-size: 60px 60px;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Confessin — Kirim Rahasia Tanpa Nama via WhatsApp</title>
 
-        .hero-bg {
-            background: linear-gradient(135deg, #E95A6B 0%, #c4485a 100%);
-        }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  :root {
+    --bg:        #0d0b18;
+    --surface:   #13101f;
+    --card:      #1a1630;
+    --border:    rgba(139,92,246,0.18);
+    --p1:        #7c3aed;
+    --p2:        #a855f7;
+    --p3:        #c084fc;
+    --accent:    #25d366;
+    --acc2:      #128c7e;
+    --gold:      #f59e0b;
+    --text:      #f3f0ff;
+    --muted:     #8b8ba3;
+    --glass:     rgba(255,255,255,0.04);
+    --glow:      rgba(124,58,237,0.35);
+  }
 
-        .clickable {
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        .clickable:hover {
-            transform: scale(1.05);
-        }
+  html { scroll-behavior: smooth; }
 
-        .clickable:active {
-            transform: scale(0.95);
-        }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Verdana', Geneva, sans-serif;
+    font-weight: 400;
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
 
-        .stat-card {
-            backdrop-filter: blur(20px);
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-        }
+  /* ─── NOISE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: .5;
+  }
 
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(233, 90, 107, 0.15);
-        }
+  /* ─── NAVBAR ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 999;
+    padding: 0 5%;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(13,11,24,0.65);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border);
+  }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
 
-        .fade-in-up {
-            animation: fadeInUp 0.6s ease-out forwards;
-        }
+  .nav-logo-icon {
+    width: 38px; height: 38px;
+    background: linear-gradient(135deg, var(--p1), var(--p2));
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px;
+    box-shadow: 0 0 18px var(--glow);
+  }
 
-        .mobile-menu {
-            transform: translateY(-100%);
-            transition: transform 0.3s ease;
-            backdrop-filter: blur(20px);
-            background: rgba(233, 90, 107, 0.95);
-        }
+  .nav-logo-text {
+    font-family: 'Verdana', Geneva, sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -.3px;
+  }
 
-        .mobile-menu.active {
-            transform: translateY(0);
-        }
+  .nav-cta {
+    background: linear-gradient(135deg, var(--accent), var(--acc2));
+    color: #fff;
+    text-decoration: none;
+    padding: 9px 22px;
+    border-radius: 50px;
+    font-size: .85rem;
+    font-weight: 600;
+    display: flex; align-items: center; gap: 7px;
+    transition: all .25s;
+    box-shadow: 0 0 20px rgba(37,211,102,.25);
+  }
+  .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(37,211,102,.4); }
 
-        /* Horizontal slider for statistics */
-        .stat-slider-container {
-            overflow: hidden;
-            position: relative;
-        }
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    padding: 120px 5% 80px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
 
-        .stat-slider-track {
-            display: flex;
-            transition: transform 0.5s ease;
-            width: 300%; /* 3 slides */
-        }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 70% 40%, rgba(124,58,237,0.28) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 50% at 10% 80%, rgba(168,85,247,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse 30% 30% at 90% 10%, rgba(37,211,102,0.08) 0%, transparent 60%);
+    z-index: 0;
+  }
 
-        .stat-slide {
-            flex: 0 0 33.333%;
-            padding: 0 1rem;
-        }
+  .hero-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: .35;
+    animation: drift 8s ease-in-out infinite alternate;
+  }
+  .hero-orb-1 { width: 500px; height: 500px; background: var(--p1); top: -100px; right: -80px; }
+  .hero-orb-2 { width: 300px; height: 300px; background: var(--accent); bottom: 0; left: 10%; animation-delay: -3s; opacity:.12; }
 
-        /* Vertical slider for features */
-        .feature-slider-container {
-            overflow: hidden;
-            position: relative;
-            height: 500px;
-        }
+  @keyframes drift {
+    from { transform: translate(0,0) scale(1); }
+    to   { transform: translate(20px,-20px) scale(1.05); }
+  }
 
-        .feature-slider-track {
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.5s ease;
-            height: 300%; /* 3 slides */
-        }
+  .hero-inner {
+    position: relative; z-index: 1;
+    max-width: 1200px; margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    width: 100%;
+  }
 
-        .feature-slide {
-            flex: 0 0 33.333%;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.5s ease;
-        }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(37,211,102,.12);
+    border: 1px solid rgba(37,211,102,.3);
+    color: var(--accent);
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: .8rem;
+    font-weight: 600;
+    letter-spacing: .5px;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+  }
+  .hero-badge-dot { width: 7px; height: 7px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:.5; transform:scale(.8); } }
 
-        .feature-slide.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+  .hero h1 {
+    font-family: 'Verdana', Geneva, sans-serif;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -.5px;
+    margin-bottom: 20px;
+  }
 
-        .testimonial-card {
-            backdrop-filter: blur(20px);
-            background: rgba(255, 255, 255, 0.95);
-            transition: all 0.3s ease;
-        }
+  .hero h1 .hl {
+    background: linear-gradient(135deg, var(--p3), var(--p2), #e879f9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(233, 90, 107, 0.15);
-        }
+  .hero-desc {
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 460px;
+    margin-bottom: 36px;
+    line-height: 1.75;
+  }
 
-        @keyframes countUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
 
-        .count-animation {
-            animation: countUp 1s ease-out forwards;
-        }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 9px;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--acc2) 100%);
+    color: #fff;
+    padding: 14px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all .3s;
+    box-shadow: 0 4px 30px rgba(37,211,102,.3);
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 40px rgba(37,211,102,.45); }
 
-        .documentation-card {
-            transition: all 0.3s ease;
-        }
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 9px;
+    background: var(--glass);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 14px 28px;
+    border-radius: 50px;
+    font-weight: 500;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all .3s;
+    backdrop-filter: blur(8px);
+  }
+  .btn-ghost:hover { background: rgba(124,58,237,.15); border-color: var(--p2); transform: translateY(-2px); }
 
-        .documentation-card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 15px 35px rgba(233, 90, 107, 0.2);
-        }
+  /* phone mockup */
+  .hero-visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-        .navbar-fixed {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
+  .phone-wrap {
+    position: relative;
+    animation: float 5s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%,100% { transform: translateY(0); }
+    50%      { transform: translateY(-14px); }
+  }
 
-        .navbar-hidden {
-            transform: translateY(-100%);
-        }
+  .phone-shell {
+    width: 240px;
+    background: #111;
+    border-radius: 36px;
+    padding: 16px 14px;
+    border: 2px solid rgba(255,255,255,.08);
+    box-shadow: 0 40px 100px rgba(0,0,0,.6), 0 0 60px var(--glow);
+    position: relative;
+    z-index: 2;
+  }
 
-        /* Enhanced feature section styling */
-        .feature-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(250, 218, 221, 0.9) 100%);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(233, 90, 107, 0.1);
-        }
+  .phone-notch {
+    width: 60px; height: 10px;
+    background: #000;
+    border-radius: 10px;
+    margin: 0 auto 12px;
+  }
 
-        .feature-icon-wrapper {
-            background: linear-gradient(135deg, #E95A6B 0%, #c4485a 100%);
-            box-shadow: 0 10px 30px rgba(233, 90, 107, 0.3);
-        }
-    </style>
+  .phone-screen {
+    background: #075e54;
+    border-radius: 20px;
+    overflow: hidden;
+    min-height: 380px;
+  }
+
+  .wa-header {
+    background: #075e54;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+  }
+  .wa-avatar {
+    width: 32px; height: 32px;
+    background: linear-gradient(135deg, var(--p1), var(--p2));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .wa-name { font-size: .78rem; font-weight: 600; color: #fff; line-height: 1.2; }
+  .wa-status { font-size: .65rem; color: rgba(255,255,255,.65); }
+
+  .wa-body {
+    background: #ece5dd;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 310px;
+  }
+
+  .bubble {
+    border-radius: 12px 12px 12px 2px;
+    padding: 8px 11px;
+    font-size: .72rem;
+    line-height: 1.5;
+    max-width: 90%;
+    position: relative;
+    font-family: 'Verdana', Geneva, sans-serif;
+  }
+  .bubble-in { background: #fff; color: #333; align-self: flex-start; box-shadow: 0 1px 2px rgba(0,0,0,.15); }
+  .bubble-out { background: #dcf8c6; color: #333; align-self: flex-end; border-radius: 12px 12px 2px 12px; }
+  .bubble-anon { background: linear-gradient(135deg, #ede7f6, #f3e5f5); color: #4a148c; align-self: flex-start; }
+  .bubble-time { font-size: .55rem; color: #999; margin-top: 2px; text-align: right; }
+  .bubble-label { font-size: .6rem; font-weight: 700; color: var(--p1); margin-bottom: 2px; }
+
+  /* floating badge */
+  .hero-float-badge {
+    position: absolute;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: .78rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 30px rgba(0,0,0,.4);
+    white-space: nowrap;
+    z-index: 10;
+  }
+  .badge-left { left: -60px; top: 60px; animation: float 6s ease-in-out infinite; }
+  .badge-right { right: -50px; bottom: 90px; animation: float 7s ease-in-out infinite; animation-delay:-2s; }
+  .badge-icon { font-size: 1.2rem; }
+  .badge-label { font-weight: 600; color: var(--text); line-height: 1.3; }
+  .badge-sub { color: var(--muted); font-size: .7rem; }
+
+  /* ─── SECTION WRAPPER ─── */
+  section { padding: 100px 5%; position: relative; z-index: 1; }
+  .sec-inner { max-width: 1200px; margin: 0 auto; }
+
+  .sec-tag {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: rgba(124,58,237,.12);
+    border: 1px solid rgba(124,58,237,.3);
+    color: var(--p3);
+    padding: 5px 14px;
+    border-radius: 50px;
+    font-size: .78rem;
+    font-weight: 600;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .sec-title {
+    font-family: 'Verdana', Geneva, sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+  .sec-title .hl {
+    background: linear-gradient(135deg, var(--p3), var(--p2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .sec-sub {
+    color: var(--muted);
+    font-size: 1rem;
+    max-width: 540px;
+    line-height: 1.75;
+  }
+
+  /* divider */
+  .section-divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 0;
+  }
+
+  /* ─── WHAT IS CONFESSIN ─── */
+  .about-section { background: var(--surface); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .about-features { display: flex; flex-direction: column; gap: 22px; margin-top: 36px; }
+
+  .feat-item {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    padding: 20px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    transition: all .3s;
+  }
+  .feat-item:hover { border-color: var(--p2); transform: translateX(6px); box-shadow: -4px 0 20px rgba(124,58,237,.2); }
+
+  .feat-icon {
+    width: 44px; height: 44px; flex-shrink: 0;
+    background: linear-gradient(135deg, var(--p1), var(--p2));
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    box-shadow: 0 0 14px var(--glow);
+  }
+  .feat-title { font-weight: 600; margin-bottom: 4px; }
+  .feat-desc { color: var(--muted); font-size: .9rem; line-height: 1.6; }
+
+  /* big stat cards */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+  }
+
+  .stat-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: all .3s;
+  }
+  .stat-box::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(124,58,237,.07), transparent);
+    pointer-events: none;
+  }
+  .stat-box:hover { border-color: var(--p2); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,.3); }
+  .stat-num {
+    font-family: 'Verdana', Geneva, sans-serif;
+    font-size: 2.4rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--p3), var(--p2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+  }
+  .stat-label { color: var(--muted); font-size: .85rem; margin-top: 6px; }
+
+  /* ─── HOW TO ─── */
+  .howto-section { background: var(--bg); }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 40px;
+    margin-top: 60px;
+  }
+
+  .step-card {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    overflow: hidden;
+    transition: all .4s;
+  }
+  .step-card:hover { border-color: var(--p2); transform: translateY(-8px); box-shadow: 0 20px 60px rgba(0,0,0,.4), 0 0 40px rgba(124,58,237,.15); }
+
+  .step-num-badge {
+    position: absolute;
+    top: 16px; left: 16px;
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, var(--p1), var(--p2));
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Verdana', Geneva, sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    z-index: 2;
+    box-shadow: 0 4px 16px var(--glow);
+  }
+
+  .step-img-area {
+    height: 220px;
+    background: linear-gradient(135deg, #1a1235, #0f0d1a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .step-img-area::before {
+    content: '';
+    position: absolute;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(124,58,237,.2), transparent 70%);
+    border-radius: 50%;
+  }
+
+  /* mini chat mockups in step cards */
+  .mini-phone {
+    width: 130px;
+    background: #111;
+    border-radius: 22px;
+    padding: 10px 8px;
+    border: 1.5px solid rgba(255,255,255,.1);
+    box-shadow: 0 20px 50px rgba(0,0,0,.5);
+    position: relative;
+    z-index: 2;
+  }
+  .mini-screen {
+    background: #ece5dd;
+    border-radius: 12px;
+    overflow: hidden;
+    min-height: 140px;
+  }
+  .mini-wa-header {
+    background: #075e54;
+    padding: 6px 8px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .mini-avatar { width: 20px; height: 20px; background: linear-gradient(135deg, var(--p1),var(--p2)); border-radius: 50%; display:flex; align-items:center; justify-content:center; font-size:9px; }
+  .mini-name { font-size:.55rem; color:#fff; font-weight:600; }
+  .mini-body { padding: 6px; display:flex; flex-direction:column; gap:5px; min-height: 110px; }
+  .mini-bubble { font-size:.6rem; padding:5px 7px; border-radius:8px 8px 8px 2px; line-height:1.4; }
+  .mini-in { background:#fff; color:#333; align-self:flex-start; max-width:85%; }
+  .mini-out { background:#dcf8c6; color:#333; align-self:flex-end; border-radius:8px 8px 2px 8px; max-width:85%; }
+  .mini-bold { font-weight:700; color:var(--p1); font-size:.55rem; display:block; margin-bottom:1px; }
+
+  /* second phone floating */
+  .mini-phone-2 {
+    position: absolute;
+    right: 14px;
+    top: 26px;
+    width: 100px;
+    transform: rotate(8deg);
+    opacity: .85;
+    z-index: 1;
+  }
+
+  .step-body { padding: 24px; }
+  .step-title { font-weight: 700; font-size: 1.05rem; margin-bottom: 8px; }
+  .step-desc { color: var(--muted); font-size: .88rem; line-height: 1.65; }
+
+  /* connector line */
+  .steps-connector {
+    position: absolute;
+    top: 50%;
+    right: -22px;
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--p1), var(--p3));
+    z-index: 3;
+  }
+  .steps-connector::after {
+    content: '';
+    position: absolute;
+    right: -5px;
+    top: -4px;
+    border: 5px solid transparent;
+    border-left-color: var(--p3);
+  }
+
+  /* ─── TESTIMONIALS ─── */
+  .testi-section { background: var(--surface); }
+
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 24px;
+    margin-top: 50px;
+  }
+
+  .testi-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    transition: all .3s;
+  }
+  .testi-card::before {
+    content: '\201C';
+    position: absolute;
+    top: 10px; right: 20px;
+    font-family: 'Verdana', Geneva, sans-serif;
+    font-size: 5rem;
+    line-height: 1;
+    color: rgba(124,58,237,.12);
+    pointer-events: none;
+  }
+  .testi-card:hover { border-color: var(--p2); transform: translateY(-5px); box-shadow: 0 16px 40px rgba(0,0,0,.35); }
+
+  .testi-stars { display:flex; gap:3px; color:var(--gold); font-size:.85rem; margin-bottom:14px; }
+  .testi-text { color: rgba(243,240,255,.85); font-size: .92rem; line-height: 1.7; margin-bottom: 20px; }
+
+  .testi-user { display:flex; align-items:center; gap:12px; }
+  .testi-avatar {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: .95rem;
+    flex-shrink: 0;
+  }
+  .testi-name { font-weight: 600; font-size: .9rem; }
+  .testi-handle { color: var(--muted); font-size: .78rem; }
+
+  .testi-featured {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, rgba(124,58,237,.15), rgba(168,85,247,.08));
+    border-color: rgba(124,58,237,.4);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 30px;
+    align-items: center;
+    padding: 36px;
+  }
+  .testi-featured .testi-text { font-size: 1.05rem; margin-bottom: 0; }
+
+  .see-all-wrap { text-align: center; margin-top: 40px; }
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 9px;
+    border: 1.5px solid var(--p2);
+    color: var(--p3);
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: .9rem;
+    text-decoration: none;
+    transition: all .3s;
+    background: transparent;
+    cursor: pointer;
+  }
+  .btn-outline:hover { background: rgba(124,58,237,.15); transform: translateY(-2px); box-shadow: 0 0 20px rgba(124,58,237,.2); }
+
+  /* ─── FAQ ─── */
+  .faq-section { background: var(--bg); }
+  .faq-wrap { max-width: 760px; margin: 0 auto; }
+  .faq-list { margin-top: 50px; display: flex; flex-direction: column; gap: 14px; }
+
+  .faq-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: border-color .3s;
+  }
+  .faq-item.open { border-color: var(--p2); }
+
+  .faq-q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: .95rem;
+    user-select: none;
+    gap: 16px;
+  }
+  .faq-q:hover { color: var(--p3); }
+
+  .faq-icon {
+    width: 28px; height: 28px; flex-shrink: 0;
+    background: rgba(124,58,237,.15);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: .7rem;
+    transition: all .3s;
+    color: var(--p3);
+  }
+  .faq-item.open .faq-icon { background: linear-gradient(135deg, var(--p1),var(--p2)); border-color: var(--p2); transform: rotate(180deg); }
+
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .4s ease, padding .3s;
+    color: var(--muted);
+    font-size: .9rem;
+    line-height: 1.75;
+    padding: 0 24px;
+  }
+  .faq-item.open .faq-a { max-height: 300px; padding: 0 24px 20px; }
+
+  /* ─── CTA BANNER ─── */
+  .cta-section { padding: 80px 5%; }
+  .cta-banner {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #1e1040, #2d1b69);
+    border: 1px solid rgba(124,58,237,.35);
+    border-radius: 28px;
+    padding: 60px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 80px rgba(124,58,237,.2);
+  }
+  .cta-banner::before {
+    content: '';
+    position: absolute;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(168,85,247,.2), transparent 65%);
+    border-radius: 50%;
+    top: -100px; right: -80px;
+    pointer-events: none;
+  }
+  .cta-banner h2 {
+    font-family: 'Verdana', Geneva, sans-serif;
+    font-size: clamp(1.8rem,3.5vw,2.8rem);
+    font-weight: 900;
+    margin-bottom: 16px;
+    position: relative; z-index:1;
+  }
+  .cta-banner p {
+    color: var(--muted);
+    font-size: 1rem;
+    margin-bottom: 36px;
+    position: relative; z-index:1;
+  }
+  .cta-banner .btn-primary { font-size: 1.05rem; padding: 16px 38px; position:relative; z-index:1; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 60px 5% 32px;
+  }
+  .footer-inner {
+    max-width: 1200px; margin: 0 auto;
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 50px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--border);
+  }
+  .footer-brand-desc { color: var(--muted); font-size: .88rem; line-height: 1.75; margin-top: 14px; max-width: 260px; }
+  .footer-wa-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: linear-gradient(135deg, var(--accent), var(--acc2));
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: .85rem;
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: 18px;
+    transition: all .25s;
+  }
+  .footer-wa-btn:hover { transform:translateY(-2px); box-shadow: 0 6px 20px rgba(37,211,102,.3); }
+
+  .footer-col-title { font-weight: 700; font-size: .9rem; margin-bottom: 18px; color: var(--text); }
+  .footer-links { display:flex; flex-direction:column; gap:10px; }
+  .footer-links a { color:var(--muted); text-decoration:none; font-size:.85rem; transition:color .25s; }
+  .footer-links a:hover { color:var(--p3); }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 28px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .footer-copy { color: var(--muted); font-size: .82rem; }
+  .footer-socials { display:flex; gap:12px; }
+  .footer-social-btn {
+    width: 36px; height: 36px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: .85rem;
+    transition: all .25s;
+  }
+  .footer-social-btn:hover { background: rgba(124,58,237,.2); border-color: var(--p2); color: var(--p3); transform:translateY(-2px); }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(30px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  .anim { opacity: 0; }
+  .anim.visible { animation: fadeUp .6s ease-out forwards; }
+  .anim-d1 { animation-delay:.1s; }
+  .anim-d2 { animation-delay:.2s; }
+  .anim-d3 { animation-delay:.3s; }
+  .anim-d4 { animation-delay:.4s; }
+
+  /* ─── RESPONSIVE ─── */
+  @media(max-width:900px){
+    .hero-inner, .about-grid { grid-template-columns:1fr; }
+    .hero-visual { display:none; }
+    .steps-grid, .testi-grid, .stat-row { grid-template-columns:1fr; }
+    .testi-featured { grid-template-columns:1fr; }
+    .footer-top { grid-template-columns:1fr 1fr; }
+    .steps-connector { display:none; }
+  }
+  @media(max-width:560px){
+    section { padding:70px 5%; }
+    .footer-top { grid-template-columns:1fr; }
+    nav { padding:0 4%; }
+    .hero { padding:110px 4% 60px; }
+    .cta-banner { padding:40px 24px; }
+  }
+</style>
 </head>
 <body>
-    <!-- Header - Fixed Navigation -->
-    <header class="navbar-fixed gradient-bg shadow-xl backdrop-blur-md">
-        <div class="container mx-auto px-4 py-4">
-            <div class="flex items-center justify-between">
-                <!-- Logo -->
-                <div class="flex items-center space-x-4">
-                    <div class="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all clickable" onclick="scrollToTop()">
-                        <i class="fas fa-heart text-coral-red text-xl"></i>
-                    </div>
-                    <div>
-                        <h1 class="text-white font-bold text-2xl drop-shadow-lg">Confessin</h1>
-                        <p class="text-pink-light text-sm font-medium">Platform Confess Terpercaya</p>
-                    </div>
-                </div>
-                
-                <!-- Navigation -->
-                <nav class="hidden md:flex items-center space-x-8">
-                    <a href="#statistics" class="nav-link text-white hover:text-pink-light transition-all duration-300 font-medium relative group clickable">
-                        Statistik
-                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-pink-light transition-all group-hover:w-full"></span>
-                    </a>
-                    <a href="#features" class="nav-link text-white hover:text-pink-light transition-all duration-300 font-medium relative group clickable">
-                        Fitur
-                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-pink-light transition-all group-hover:w-full"></span>
-                    </a>
-                    <a href="#documentation" class="nav-link text-white hover:text-pink-light transition-all duration-300 font-medium relative group clickable">
-                        Panduan
-                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-pink-light transition-all group-hover:w-full"></span>
-                    </a>
-                    <a href="#testimonials" class="nav-link text-white hover:text-pink-light transition-all duration-300 font-medium relative group clickable">
-                        Testimoni
-                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-pink-light transition-all group-hover:w-full"></span>
-                    </a>
-                    <button onclick="startConfess()" class="bg-white text-coral-red px-6 py-2 rounded-full font-semibold hover:bg-pink-light transition-all shadow-lg hover:shadow-xl clickable">
-                        <i class="fas fa-paper-plane mr-2"></i>Mulai Confess
-                    </button>
-                </nav>
-                
-                <!-- Mobile Menu Button -->
-                <button onclick="toggleMobileMenu()" class="md:hidden text-white p-2 clickable">
-                    <i class="fas fa-bars text-xl" id="mobileMenuIcon"></i>
-                </button>
+
+<!-- ═══════════════════════════════════════ NAVBAR -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">🤫</div>
+    <span class="nav-logo-text">Confessin</span>
+  </a>
+  <div style="display:flex;align-items:center;gap:28px;">
+    <a href="#about" style="color:var(--muted);text-decoration:none;font-size:.9rem;font-weight:500;transition:color .2s;" onmouseover="this.style.color='var(--p3)'" onmouseout="this.style.color='var(--muted)'">Tentang</a>
+    <a href="#howto" style="color:var(--muted);text-decoration:none;font-size:.9rem;font-weight:500;transition:color .2s;" onmouseover="this.style.color='var(--p3)'" onmouseout="this.style.color='var(--muted)'">Cara Pakai</a>
+    <a href="#faq" style="color:var(--muted);text-decoration:none;font-size:.9rem;font-weight:500;transition:color .2s;" onmouseover="this.style.color='var(--p3)'" onmouseout="this.style.color='var(--muted)'">FAQ</a>
+    <a href="https://wa.me/628xxxxxxxxxx" class="nav-cta">
+      <i class="fab fa-whatsapp"></i> Mulai Sekarang
+    </a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════ HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Bot WhatsApp • Aktif 24/7
+      </div>
+      <h1>Ungkapkan <span class="hl">Rahasiamu</span><br>Tanpa Siapapun Tahu</h1>
+      <p class="hero-desc">
+        Confessin adalah bot WhatsApp yang memungkinkan kamu mengirim pesan, pengakuan, atau curhat secara <strong style="color:var(--p3);">anonim</strong> ke siapa saja — tanpa nama, tanpa jejak, tanpa drama.
+      </p>
+      <div class="hero-actions">
+        <a href="https://wa.me/628xxxxxxxxxx" class="btn-primary">
+          <i class="fab fa-whatsapp"></i> Coba Gratis via WhatsApp
+        </a>
+        <a href="#howto" class="btn-ghost">
+          <i class="fas fa-play-circle"></i> Lihat Cara Kerja
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <!-- Floating badges -->
+      <div class="hero-float-badge badge-left">
+        <span class="badge-icon">🔒</span>
+        <div>
+          <div class="badge-label">100% Anonim</div>
+          <div class="badge-sub">Identitasmu aman</div>
+        </div>
+      </div>
+      <div class="hero-float-badge badge-right">
+        <span class="badge-icon">⚡</span>
+        <div>
+          <div class="badge-label">Instan & Mudah</div>
+          <div class="badge-sub">Cukup chat WA</div>
+        </div>
+      </div>
+
+      <!-- Phone mockup -->
+      <div class="phone-wrap">
+        <div class="phone-shell">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="wa-header">
+              <div class="wa-avatar">🤫</div>
+              <div>
+                <div class="wa-name">Confessin Bot</div>
+                <div class="wa-status">● Online</div>
+              </div>
             </div>
+            <div class="wa-body">
+              <div class="bubble bubble-in">
+                <div style="font-size:.65rem;font-weight:700;color:var(--p1);margin-bottom:3px;">🤖 Confessin</div>
+                Halo! Selamat datang di Confessin 🤫<br>Kirim pesan anonim ke siapapun!<br><br>Ketik /kirim untuk mulai.
+                <div class="bubble-time">09.14</div>
+              </div>
+              <div class="bubble bubble-out">
+                /kirim 628123456789 Aku suka sama kamu sejak lama 💜
+                <div class="bubble-time">09.15 ✓✓</div>
+              </div>
+              <div class="bubble bubble-in">
+                <div style="font-size:.65rem;font-weight:700;color:#25d366;margin-bottom:3px;">✅ Terkirim!</div>
+                Pesanmu sudah dikirim secara anonim. Penerima tidak tahu siapa kamu 🔒
+                <div class="bubble-time">09.15</div>
+              </div>
+              <div class="bubble bubble-anon">
+                <div style="font-size:.65rem;font-weight:700;color:var(--p1);margin-bottom:3px;">📨 Pesan Anonim Untukmu</div>
+                "Aku suka sama kamu sejak lama 💜"
+                <div class="bubble-time">09.15</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ═══════════════════════════════════════ WHAT IS -->
+<section class="about-section" id="about">
+  <div class="sec-inner">
+    <div class="about-grid">
+      <div>
+        <div class="sec-tag anim">✨ Tentang Confessin</div>
+        <h2 class="sec-title anim anim-d1">Apa Itu <span class="hl">Confessin?</span></h2>
+        <p class="sec-sub anim anim-d2" style="margin-bottom:10px;">
+          Confessin adalah bot WhatsApp cerdas yang menjembatani pengiriman pesan anonim antar pengguna — cocok untuk mengungkap perasaan, memberi kritik jujur, atau sekadar iseng kirim tebak-tebakan tanpa ketahuan.
+        </p>
+        <div class="about-features anim anim-d3">
+          <div class="feat-item">
+            <div class="feat-icon">🎭</div>
+            <div>
+              <div class="feat-title">Identitas Tersembunyi Penuh</div>
+              <div class="feat-desc">Nomor aslimu tidak pernah diteruskan. Kami tidak menyimpan log percakapan. Privasi adalah segalanya.</div>
+            </div>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon">💬</div>
+            <div>
+              <div class="feat-title">Langsung di WhatsApp</div>
+              <div class="feat-desc">Tidak perlu unduh aplikasi baru. Cukup chat dengan bot kami seperti kamu chat dengan teman.</div>
+            </div>
+          </div>
+          <div class="feat-item">
+            <div class="feat-icon">⚡</div>
+            <div>
+              <div class="feat-title">Pengiriman Instan</div>
+              <div class="feat-desc">Pesan terkirim dalam hitungan detik. Bot aktif 24 jam, 7 hari seminggu tanpa henti.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="anim anim-d2">
+        <div class="stat-row" style="margin-bottom:24px;">
+          <div class="stat-box">
+            <div class="stat-num">50K+</div>
+            <div class="stat-label">Pesan Terkirim</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">12K+</div>
+            <div class="stat-label">Pengguna Aktif</div>
+          </div>
+          <div class="stat-box" style="grid-column:1/-1;">
+            <div class="stat-num">4.9 ⭐</div>
+            <div class="stat-label">Rating Rata-rata</div>
+          </div>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:20px;padding:24px;">
+          <div style="font-size:.8rem;font-weight:700;color:var(--p3);letter-spacing:.5px;text-transform:uppercase;margin-bottom:14px;">🔐 Keamanan & Privasi</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;align-items:center;gap:10px;font-size:.88rem;color:rgba(243,240,255,.8);">
+              <i class="fas fa-check-circle" style="color:var(--accent);"></i> Nomor pengirim tidak diteruskan
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:.88rem;color:rgba(243,240,255,.8);">
+              <i class="fas fa-check-circle" style="color:var(--accent);"></i> Tidak ada penyimpanan chat permanen
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:.88rem;color:rgba(243,240,255,.8);">
+              <i class="fas fa-check-circle" style="color:var(--accent);"></i> Enkripsi end-to-end WhatsApp
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;font-size:.88rem;color:rgba(243,240,255,.8);">
+              <i class="fas fa-check-circle" style="color:var(--accent);"></i> Fitur blokir & lapor penyalahgunaan
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ═══════════════════════════════════════ HOW TO -->
+<section class="howto-section" id="howto">
+  <div class="sec-inner">
+    <div style="text-align:center;">
+      <div class="sec-tag anim" style="display:inline-flex;">📱 Cara Penggunaan</div>
+      <h2 class="sec-title anim anim-d1">Mudah dalam <span class="hl">3 Langkah</span></h2>
+      <p class="sec-sub anim anim-d2" style="margin:0 auto;">Tidak perlu daftar akun. Tidak perlu password. Langsung pakai dalam hitungan detik.</p>
+    </div>
+
+    <div class="steps-grid">
+
+      <!-- Step 1 -->
+      <div class="step-card anim anim-d1" style="position:relative;">
+        <div class="step-num-badge">1</div>
+        <div class="step-img-area">
+          <div class="mini-phone" style="transform:rotate(-4deg);">
+            <div style="width:40px;height:6px;background:#000;border-radius:5px;margin:0 auto 7px;"></div>
+            <div class="mini-screen">
+              <div class="mini-wa-header">
+                <div class="mini-avatar">🤫</div>
+                <div class="mini-name">Confessin</div>
+              </div>
+              <div class="mini-body">
+                <div class="mini-bubble mini-in">
+                  <span class="mini-bold">🤖 Confessin</span>
+                  Halo! Selamat datang 👋 Ketik /mulai untuk memulai.
+                </div>
+                <div class="mini-bubble mini-out">/mulai</div>
+                <div class="mini-bubble mini-in">
+                  <span class="mini-bold">✅ Siap!</span>
+                  Akunmu sudah aktif. Bagikan link-mu sekarang!
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="step-body">
+          <div class="step-title">Mulai Chat Bot</div>
+          <div class="step-desc">Buka WhatsApp dan cari kontak <strong style="color:var(--p3);">Confessin Bot</strong> atau klik tombol di bawah. Ketik /mulai untuk mengaktifkan akunmu secara instan.</div>
+        </div>
+        <div class="steps-connector"></div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step-card anim anim-d2" style="position:relative;">
+        <div class="step-num-badge">2</div>
+        <div class="step-img-area">
+          <div class="mini-phone">
+            <div style="width:40px;height:6px;background:#000;border-radius:5px;margin:0 auto 7px;"></div>
+            <div class="mini-screen">
+              <div class="mini-wa-header">
+                <div class="mini-avatar">🤫</div>
+                <div class="mini-name">Confessin</div>
+              </div>
+              <div class="mini-body">
+                <div class="mini-bubble mini-out">/kirim 6281234...</div>
+                <div class="mini-bubble mini-in">
+                  <span class="mini-bold">📝 Masukkan pesan:</span>
+                  Ketik pesanmu yang akan dikirim anonim.
+                </div>
+                <div class="mini-bubble mini-out">Kamu tuh baik banget btw 🌸</div>
+              </div>
+            </div>
+          </div>
+          <!-- floating second phone -->
+          <div class="mini-phone mini-phone-2" style="width:90px;transform:rotate(10deg);top:30px;right:18px;opacity:.7;">
+            <div style="width:30px;height:5px;background:#000;border-radius:5px;margin:0 auto 6px;"></div>
+            <div class="mini-screen" style="min-height:100px;">
+              <div class="mini-wa-header">
+                <div class="mini-avatar" style="width:16px;height:16px;font-size:7px;">🤫</div>
+                <div class="mini-name" style="font-size:.45rem;">Confessin</div>
+              </div>
+              <div class="mini-body" style="min-height:72px;gap:4px;padding:5px;">
+                <div class="mini-bubble mini-in" style="font-size:.5rem;padding:4px 5px;">Tulis pesanmu...</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="step-body">
+          <div class="step-title">Masukkan Nomor & Pesan</div>
+          <div class="step-desc">Ketik perintah <strong style="color:var(--p3);">/kirim [nomor tujuan]</strong> lalu tulis pesanmu. Kamu bisa kirim teks, emoji, atau stiker — semua bisa!</div>
+        </div>
+        <div class="steps-connector"></div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step-card anim anim-d3">
+        <div class="step-num-badge">3</div>
+        <div class="step-img-area">
+          <div class="mini-phone" style="transform:rotate(3deg);">
+            <div style="width:40px;height:6px;background:#000;border-radius:5px;margin:0 auto 7px;"></div>
+            <div class="mini-screen">
+              <div class="mini-wa-header">
+                <div class="mini-avatar">😊</div>
+                <div class="mini-name">Penerima</div>
+              </div>
+              <div class="mini-body">
+                <div class="mini-bubble mini-in" style="background:linear-gradient(135deg,#ede7f6,#f3e5f5);">
+                  <span class="mini-bold" style="color:#7c3aed;">📨 Pesan Anonim!</span>
+                  "Kamu tuh baik banget btw 🌸"
+                </div>
+                <div class="mini-bubble mini-in">
+                  <span class="mini-bold">🤫 Dari siapa?</span>
+                  Identitas pengirim tersembunyi.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="step-body">
+          <div class="step-title">Pesan Terkirim Anonim!</div>
+          <div class="step-desc">Penerima mendapat notifikasi pesan anonim langsung di WhatsApp mereka. Identitasmu <strong style="color:var(--accent);">terlindungi 100%</strong> — tidak ada yang tahu itu dari kamu!</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="text-align:center;margin-top:50px;" class="anim anim-d4">
+      <a href="https://wa.me/628xxxxxxxxxx" class="btn-primary" style="font-size:1rem;padding:15px 36px;">
+        <i class="fab fa-whatsapp"></i> Coba Sekarang — Gratis!
+      </a>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ═══════════════════════════════════════ TESTIMONIALS -->
+<section class="testi-section" id="testimoni">
+  <div class="sec-inner">
+    <div style="text-align:center;">
+      <div class="sec-tag anim" style="display:inline-flex;">💜 Testimoni</div>
+      <h2 class="sec-title anim anim-d1">Apa Kata <span class="hl">Mereka?</span></h2>
+      <p class="sec-sub anim anim-d2" style="margin:0 auto;">Ribuan pengguna sudah merasakan serunya kirim pesan anonim lewat Confessin.</p>
+    </div>
+
+    <div class="testi-grid anim anim-d2">
+
+      <!-- Featured -->
+      <div class="testi-card testi-featured">
+        <div>
+          <div class="testi-stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+          <p class="testi-text">"Gue udah coba banyak bot anonim tapi Confessin paling simpel dan paling cepet. Kirim pesan ke gebetan tanpa dag-dig-dug ketahuan. Yang paling penting, beneran anonim! Besoknya si dia malah penasaran banget, haha. Highly recommended buat yang mau ungkapin perasaan tapi malu!"</p>
+          <div class="testi-user">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#7c3aed,#a855f7);">R</div>
+            <div>
+              <div class="testi-name">Rizky A.</div>
+              <div class="testi-handle">@rizky_a • Jakarta</div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:center;">
+          <div style="font-size:6rem;line-height:1;filter:drop-shadow(0 0 20px rgba(124,58,237,.5));">🤫</div>
+        </div>
+      </div>
+
+      <!-- Card 1 -->
+      <div class="testi-card">
+        <div class="testi-stars">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+        </div>
+        <p class="testi-text">"Seru banget! Teman-teman pada penasaran siapa yang kirim pesan ke mereka. Bikin suasana grup jadi ramai dan geli. Bot-nya responsif, tidak pernah down sejauh ini."</p>
+        <div class="testi-user">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#f59e0b,#ef4444);">S</div>
+          <div>
+            <div class="testi-name">Sari W.</div>
+            <div class="testi-handle">@sariw • Bandung</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="testi-card">
+        <div class="testi-stars">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+        </div>
+        <p class="testi-text">"Awalnya ragu, tapi ternyata beneran anonim dan aman. Saya pakai buat kasih masukan jujur ke teman kantor tanpa bikin hubungan jadi canggung. Sangat berguna!"</p>
+        <div class="testi-user">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#0ea5e9,#6366f1);">B</div>
+          <div>
+            <div class="testi-name">Budi S.</div>
+            <div class="testi-handle">@budi_s • Surabaya</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="testi-card">
+        <div class="testi-stars">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+        </div>
+        <p class="testi-text">"Pakai pas event reuni SMA, semua orang kirim pesan anonim ke satu sama lain. Seru banget! Ada yang ketawa, ada yang baper. Definitif recommend ke semua!"</p>
+        <div class="testi-user">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#25d366,#128c7e);">D</div>
+          <div>
+            <div class="testi-name">Dinda P.</div>
+            <div class="testi-handle">@dinda_p • Yogyakarta</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="testi-card">
+        <div class="testi-stars">
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+        </div>
+        <p class="testi-text">"Udah 3 bulan pakai Confessin, tidak sekali pun ada masalah. Interface-nya simpel banget, pemakaiannya intuitif. Paling suka fitur bisa kirim ke banyak nomor sekaligus!"</p>
+        <div class="testi-user">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#ec4899,#8b5cf6);">F</div>
+          <div>
+            <div class="testi-name">Farah N.</div>
+            <div class="testi-handle">@farah_n • Medan</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="see-all-wrap anim anim-d3">
+      <button class="btn-outline" onclick="alert('Menampilkan semua testimoni...')">
+        <i class="fas fa-comments"></i> Lihat Semua Testimoni
+        <i class="fas fa-arrow-right" style="font-size:.8rem;"></i>
+      </button>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ═══════════════════════════════════════ FAQ -->
+<section class="faq-section" id="faq">
+  <div class="sec-inner">
+    <div style="text-align:center;" class="faq-wrap">
+      <div class="sec-tag anim" style="display:inline-flex;">❓ FAQ</div>
+      <h2 class="sec-title anim anim-d1">Pertanyaan yang <span class="hl">Sering Ditanya</span></h2>
+      <p class="sec-sub anim anim-d2" style="margin:0 auto;">Ada yang masih bingung? Kami jawab semua di sini.</p>
+    </div>
+
+    <div class="faq-wrap">
+      <div class="faq-list anim anim-d2">
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>Apakah identitas saya benar-benar tersembunyi?</span>
+            <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+          </div>
+          <div class="faq-a">Ya, 100%. Confessin tidak pernah meneruskan nomor asli pengirim kepada penerima. Sistem kami dirancang agar identitas pengirim tetap anonim secara teknis — penerima hanya tahu ada pesan masuk dari "Anonim", tanpa jejak nomor aslimu sama sekali.</div>
         </div>
 
-        <!-- Mobile Menu -->
-        <div id="mobileMenu" class="mobile-menu md:hidden absolute top-full left-0 right-0 shadow-xl">
-            <div class="container mx-auto px-4 py-4 space-y-4">
-                <a href="#statistics" class="block text-white hover:text-pink-light transition-all font-medium clickable">
-                    <i class="fas fa-chart-bar mr-2"></i>Statistik
-                </a>
-                <a href="#features" class="block text-white hover:text-pink-light transition-all font-medium clickable">
-                    <i class="fas fa-star mr-2"></i>Fitur
-                </a>
-                <a href="#documentation" class="block text-white hover:text-pink-light transition-all font-medium clickable">
-                    <i class="fas fa-book mr-2"></i>Panduan
-                </a>
-                <a href="#testimonials" class="block text-white hover:text-pink-light transition-all font-medium clickable">
-                    <i class="fas fa-comments mr-2"></i>Testimoni
-                </a>
-                <button onclick="startConfess()" class="w-full bg-white text-coral-red px-6 py-3 rounded-full font-semibold hover:bg-pink-light transition-all shadow-lg clickable">
-                    <i class="fas fa-paper-plane mr-2"></i>Mulai Confess
-                </button>
-            </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>Apakah ada biaya untuk menggunakan Confessin?</span>
+            <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+          </div>
+          <div class="faq-a">Confessin tersedia secara gratis untuk penggunaan dasar. Kamu bisa kirim hingga 10 pesan anonim per hari tanpa biaya apapun. Untuk penggunaan tidak terbatas, tersedia paket Premium dengan harga terjangkau — cek /paket di bot untuk info lebih lanjut.</div>
         </div>
-    </header>
 
-    <!-- Hero Section -->
-    <section class="hero-bg hero-pattern py-20 relative overflow-hidden" style="margin-top: 80px;">
-        <div class="container mx-auto px-4 text-center relative z-10">
-            <div class="fade-in-up">
-                <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 drop-shadow-2xl">
-                    Bagikan Ceritamu dengan <span class="text-yellow-300">Aman</span>
-                </h1>
-                <p class="text-xl md:text-2xl text-pink-light mb-8 max-w-3xl mx-auto leading-relaxed">
-                    Platform terpercaya untuk berbagi confess secara anonim. Ceritakan apa yang ada di hatimu tanpa khawatir identitas terungkap.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <button onclick="startConfess()" class="bg-white text-coral-red px-8 py-4 rounded-full font-bold text-lg shadow-2xl hover:shadow-3xl transition-all hover:scale-105 clickable">
-                        <i class="fas fa-heart mr-2"></i>
-                        Kirim Confess
-                    </button>
-                    <button onclick="scrollToFeatures()" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-coral-red transition-all clickable">
-                        <i class="fas fa-info-circle mr-2"></i>
-                        Pelajari Lebih Lanjut
-                    </button>
-                </div>
-            </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>Apakah penerima harus punya akun Confessin juga?</span>
+            <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+          </div>
+          <div class="faq-a">Tidak perlu! Penerima hanya membutuhkan WhatsApp aktif. Pesan anonim akan langsung dikirimkan ke nomor WhatsApp mereka oleh bot kami. Tidak perlu akun atau pendaftaran apa pun dari sisi penerima.</div>
         </div>
-        
-        <!-- Floating Elements -->
-        <div class="absolute top-20 left-10 w-20 h-20 bg-white bg-opacity-20 rounded-full animate-pulse"></div>
-        <div class="absolute top-40 right-20 w-16 h-16 bg-white bg-opacity-10 rounded-full animate-pulse delay-1000"></div>
-        <div class="absolute bottom-20 left-1/4 w-12 h-12 bg-white bg-opacity-15 rounded-full animate-pulse delay-2000"></div>
-    </section>
 
-    <!-- Statistics Section - Horizontal Slider -->
-    <section id="statistics" class="py-20 -mt-10 relative z-20">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Statistik Platform</h2>
-                <p class="text-xl text-gray-600">Data real-time pengguna dan confess di platform kami</p>
-            </div>
-
-            <!-- Desktop View -->
-            <div class="hidden md:grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-                <!-- Total Users -->
-                <div class="stat-card rounded-3xl p-8 shadow-xl text-center">
-                    <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-users text-white text-xl"></i>
-                    </div>
-                    <h3 class="text-3xl font-bold text-gray-800 mb-2 count-animation" data-count="15742">0</h3>
-                    <p class="text-gray-600 font-medium">Total Pengguna</p>
-                </div>
-
-                <!-- Success Confess -->
-                <div class="stat-card rounded-3xl p-8 shadow-xl text-center">
-                    <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-paper-plane text-white text-xl"></i>
-                    </div>
-                    <h3 class="text-3xl font-bold text-gray-800 mb-2 count-animation" data-count="28634">0</h3>
-                    <p class="text-gray-600 font-medium">Confess Terkirim</p>
-                </div>
-
-                <!-- Failed Confess -->
-                <div class="stat-card rounded-3xl p-8 shadow-xl text-center">
-                    <div class="w-16 h-16 bg-gradient-to-r from-red-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-exclamation-triangle text-white text-xl"></i>
-                    </div>
-                    <h3 class="text-3xl font-bold text-gray-800 mb-2 count-animation" data-count="1247">0</h3>
-                    <p class="text-gray-600 font-medium">Confess Gagal</p>
-                </div>
-            </div>
-
-            <!-- Mobile Horizontal Slider -->
-            <div class="md:hidden">
-                <div class="stat-slider-container max-w-sm mx-auto">
-                    <div class="stat-slider-track" id="statSliderTrack">
-                        <!-- Slide 1 -->
-                        <div class="stat-slide">
-                            <div class="stat-card rounded-3xl p-8 shadow-xl text-center">
-                                <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <i class="fas fa-users text-white text-xl"></i>
-                                </div>
-                                <h3 class="text-3xl font-bold text-gray-800 mb-2 count-animation" data-count="15742">15,742</h3>
-                                <p class="text-gray-600 font-medium">Total Pengguna</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Slide 2 -->
-                        <div class="stat-slide">
-                            <div class="stat-card rounded-3xl p-8 shadow-xl text-center">
-                                <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <i class="fas fa-paper-plane text-white text-xl"></i>
-                                </div>
-                                <h3 class="text-3xl font-bold text-gray-800 mb-2 count-animation" data-count="28634">28,634</h3>
-                                <p class="text-gray-600 font-medium">Confess Terkirim</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Slide 3 -->
-                        <div class="stat-slide">
-                            <div class="stat-card rounded-3xl p-8 shadow-xl text-center">
-                                <div class="w-16 h-16 bg-gradient-to-r from-red-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <i class="fas fa-exclamation-triangle text-white text-xl"></i>
-                                </div>
-                                <h3 class="text-3xl font-bold text-gray-800 mb-2 count-animation" data-count="1247">1,247</h3>
-                                <p class="text-gray-600 font-medium">Confess Gagal</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Slider Controls -->
-                <div class="flex justify-center space-x-4 mt-6">
-                    <button onclick="previousStatSlide()" class="bg-coral-red text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all clickable">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <button onclick="nextStatSlide()" class="bg-coral-red text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all clickable">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div>
-                
-                <!-- Slider Indicators -->
-                <div class="flex justify-center space-x-2 mt-4">
-                    <div class="stat-indicator w-3 h-3 bg-coral-red rounded-full transition-all active"></div>
-                    <div class="stat-indicator w-3 h-3 bg-gray-300 rounded-full transition-all"></div>
-                    <div class="stat-indicator w-3 h-3 bg-gray-300 rounded-full transition-all"></div>
-                </div>
-            </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>Bagaimana jika ada yang menyalahgunakan fitur ini?</span>
+            <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+          </div>
+          <div class="faq-a">Kami punya sistem moderasi otomatis yang mendeteksi konten berbahaya, ancaman, atau pelecehan. Penerima juga bisa melaporkan pesan dengan perintah /lapor, dan nomor pelanggar akan diblokir permanen dari layanan kami. Anonim bukan berarti bebas dari tanggung jawab.</div>
         </div>
-    </section>
 
-    <!-- Features Section - Improved -->
-    <section id="features" class="py-20 bg-gradient-to-br from-pink-50 to-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-                    Kenapa Harus Menggunakan Layanan Kami?
-                </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Berbagai keunggulan yang membuat Confessin menjadi platform terpercaya pilihan jutaan pengguna
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                <!-- Feature 1: Keamanan -->
-                <div class="feature-card rounded-3xl p-8 shadow-xl text-center card-hover">
-                    <div class="feature-icon-wrapper w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-shield-alt text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Keamanan Terjamin</h3>
-                    <ul class="text-left space-y-3 text-gray-600 mb-6">
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-3 flex-shrink-0"></i>
-                            <span>Enkripsi end-to-end untuk melindungi data</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-3 flex-shrink-0"></i>
-                            <span>Tidak menyimpan informasi identitas</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-3 flex-shrink-0"></i>
-                            <span>Server aman dengan sertifikat SSL/TLS</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-3 flex-shrink-0"></i>
-                            <span>Moderator profesional 24/7</span>
-                        </li>
-                    </ul>
-                    <div class="bg-gradient-to-r from-coral-red to-pink-dark text-white py-3 px-6 rounded-full font-semibold">
-                        100% Anonim & Aman
-                    </div>
-                </div>
-
-                <!-- Feature 2: Interface -->
-                <div class="feature-card rounded-3xl p-8 shadow-xl text-center card-hover">
-                    <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-                        <i class="fas fa-mobile-alt text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Interface Mudah</h3>
-                    <ul class="text-left space-y-3 text-gray-600 mb-6">
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-3 flex-shrink-0"></i>
-                            <span>Desain minimalis dan intuitif</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-3 flex-shrink-0"></i>
-                            <span>Responsif di semua perangkat</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-3 flex-shrink-0"></i>
-                            <span>Pengiriman hanya 2 langkah mudah</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-3 flex-shrink-0"></i>
-                            <span>Tema gelap dan terang tersedia</span>
-                        </li>
-                    </ul>
-                    <div class="bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 px-6 rounded-full font-semibold">
-                        Mudah Digunakan
-                    </div>
-                </div>
-
-                <!-- Feature 3: Respon -->
-                <div class="feature-card rounded-3xl p-8 shadow-xl text-center card-hover">
-                    <div class="w-20 h-20 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-                        <i class="fas fa-bolt text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Respon Super Cepat</h3>
-                    <ul class="text-left space-y-3 text-gray-600 mb-6">
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-3 flex-shrink-0"></i>
-                            <span>Pengiriman dalam hitungan detik</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-3 flex-shrink-0"></i>
-                            <span>Notifikasi real-time status</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-3 flex-shrink-0"></i>
-                            <span>Uptime 99.9% keandalan maksimal</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-3 flex-shrink-0"></i>
-                            <span>Customer service 24/7</span>
-                        </li>
-                    </ul>
-                    <div class="bg-gradient-to-r from-green-500 to-green-600 text-white py-3 px-6 rounded-full font-semibold">
-                        Super Cepat
-                    </div>
-                </div>
-            </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>Apakah saya bisa mengirim media (foto, video, suara)?</span>
+            <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+          </div>
+          <div class="faq-a">Saat ini Confessin mendukung pengiriman teks, emoji, dan stiker secara anonim. Dukungan untuk media (foto dan audio) sedang dalam pengembangan dan akan segera hadir di update berikutnya. Stay tuned!</div>
         </div>
-    </section>
 
-    <!-- Documentation Section - 2 Steps -->
-    <section id="documentation" class="py-20 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-                    Cara Penggunaan Bot
-                </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Hanya 2 langkah mudah untuk mengirim confess dengan bot kami
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
-                <!-- Step 1 -->
-                <div class="documentation-card bg-white rounded-3xl p-8 shadow-xl">
-                    <div class="text-center mb-6">
-                        <div class="w-24 h-24 bg-gradient-to-r from-coral-red to-pink-dark rounded-full flex items-center justify-center mx-auto mb-4">
-                            <span class="text-white text-3xl font-bold">1</span>
-                        </div>
-                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Buka Bot & Pilih Target</h3>
-                    </div>
-                    <div class="bg-gray-100 rounded-2xl p-6 mb-6 text-center">
-                        <!-- Placeholder untuk gambar step 1 -->
-                        <div class="w-full h-64 bg-gradient-to-br from-gray-200 to-gray-300 rounded-lg flex flex-col items-center justify-center">
-                            <i class="fas fa-image text-gray-500 text-4xl mb-2"></i>
-                            <p class="text-gray-500 font-medium">Gambar Step 1</p>
-                            <p class="text-gray-400 text-sm">Silakan upload gambar Anda</p>
-                        </div>
-                    </div>
-                    <ul class="space-y-3 text-gray-600">
-                        <li class="flex items-start">
-                            <i class="fas fa-arrow-right text-coral-red mt-1 mr-3 flex-shrink-0"></i>
-                            <span>Buka bot Confessin di Telegram</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-arrow-right text-coral-red mt-1 mr-3 flex-shrink-0"></i>
-                            <span>Pilih platform target (Instagram, Twitter, dll)</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-arrow-right text-coral-red mt-1 mr-3 flex-shrink-0"></i>
-                            <span>Masukkan username target dengan benar</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Step 2 -->
-                <div class="documentation-card bg-white rounded-3xl p-8 shadow-xl">
-                    <div class="text-center mb-6">
-                        <div class="w-24 h-24 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <span class="text-white text-3xl font-bold">2</span>
-                        </div>
-                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Tulis & Kirim Confess</h3>
-                    </div>
-                    <div class="bg-gray-100 rounded-2xl p-6 mb-6 text-center">
-                        <!-- Placeholder untuk gambar step 2 -->
-                        <div class="w-full h-64 bg-gradient-to-br from-gray-200 to-gray-300 rounded-lg flex flex-col items-center justify-center">
-                            <i class="fas fa-image text-gray-500 text-4xl mb-2"></i>
-                            <p class="text-gray-500 font-medium">Gambar Step 2</p>
-                            <p class="text-gray-400 text-sm">Silakan upload gambar Anda</p>
-                        </div>
-                    </div>
-                    <ul class="space-y-3 text-gray-600">
-                        <li class="flex items-start">
-                            <i class="fas fa-arrow-right text-green-500 mt-1 mr-3 flex-shrink-0"></i>
-                            <span>Tulis pesan confess yang ingin dikirim</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-arrow-right text-green-500 mt-1 mr-3 flex-shrink-0"></i>
-                            <span>Klik tombol "Kirim Confess"</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-arrow-right text-green-500 mt-1 mr-3 flex-shrink-0"></i>
-                            <span>Tunggu konfirmasi pengiriman berhasil</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="text-center mt-12">
-                <button onclick="startConfess()" class="bg-gradient-to-r from-coral-red to-pink-dark text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl transition-all hover:scale-105 clickable">
-                    <i class="fas fa-rocket mr-2"></i>
-                    Mulai Kirim Confess Sekarang
-                </button>
-            </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>Bagaimana cara berhenti menggunakan layanan?</span>
+            <div class="faq-icon"><i class="fas fa-chevron-down"></i></div>
+          </div>
+          <div class="faq-a">Cukup ketik /hapusakun di bot untuk menghapus seluruh data akunmu dari sistem kami. Prosesnya instan dan tidak bisa dibatalkan. Kamu juga bisa cukup berhenti chat — tidak ada langganan atau tagihan otomatis.</div>
         </div>
-    </section>
 
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="py-20">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-                    Testimoni Pengguna
-                </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Ribuan pengguna telah mempercayai layanan kami untuk berbagi cerita mereka
-                </p>
-            </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                <!-- Testimonial 1 -->
-                <div class="testimonial-card rounded-3xl p-8 shadow-xl border-l-4 border-coral-red">
-                    <div class="flex items-center mb-6">
-                        <div class="w-12 h-12 bg-gradient-to-r from-coral-red to-pink-dark rounded-full flex items-center justify-center">
-                            <i class="fas fa-user text-white"></i>
-                        </div>
-                        <div class="ml-4">
-                            <h4 class="font-bold text-gray-800">Sarah K.</h4>
-                            <p class="text-gray-500 text-sm">Mahasiswa</p>
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <div class="flex text-yellow-400 mb-3">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p class="text-gray-600 italic">
-                            "Platform yang sangat membantu! Akhirnya bisa cerita tanpa khawatir identitas ketahuan. Interface-nya juga mudah banget dipakai."
-                        </p>
-                    </div>
-                </div>
+<!-- ═══════════════════════════════════════ CTA BANNER -->
+<section class="cta-section">
+  <div class="cta-banner anim">
+    <h2>Siap Ungkapkan <span style="background:linear-gradient(135deg,var(--p3),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Rahasiamu?</span></h2>
+    <p>Bergabung dengan ribuan pengguna yang sudah merasakan serunya kirim pesan anonim via WhatsApp.</p>
+    <a href="https://wa.me/628xxxxxxxxxx" class="btn-primary">
+      <i class="fab fa-whatsapp" style="font-size:1.1rem;"></i> Mulai Gratis di WhatsApp
+    </a>
+  </div>
+</section>
 
-                <!-- Testimonial 2 -->
-                <div class="testimonial-card rounded-3xl p-8 shadow-xl border-l-4 border-blue-500">
-                    <div class="flex items-center mb-6">
-                        <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center">
-                            <i class="fas fa-user text-white"></i>
-                        </div>
-                        <div class="ml-4">
-                            <h4 class="font-bold text-gray-800">Andi R.</h4>
-                            <p class="text-gray-500 text-sm">Karyawan Swasta</p>
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <div class="flex text-yellow-400 mb-3">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p class="text-gray-600 italic">
-                            "Keren banget! Confess langsung terkirim dan aman. Customer servicenya juga responsif kalau ada masalah. Recommended!"
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Testimonial 3 -->
-                <div class="testimonial-card rounded-3xl p-8 shadow-xl border-l-4 border-green-500">
-                    <div class="flex items-center mb-6">
-                        <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center">
-                            <i class="fas fa-user text-white"></i>
-                        </div>
-                        <div class="ml-4">
-                            <h4 class="font-bold text-gray-800">Maya L.</h4>
-                            <p class="text-gray-500 text-sm">Freelancer</p>
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <div class="flex text-yellow-400 mb-3">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p class="text-gray-600 italic">
-                            "Sudah pakai dari tahun lalu dan selalu puas! Privasi terjaga, pengiriman cepat, dan yang penting gratis!"
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-center mt-12">
-                <button onclick="viewAllTestimonials()" class="bg-gradient-to-r from-gray-600 to-gray-700 text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl transition-all hover:scale-105 clickable">
-                    <i class="fas fa-eye mr-2"></i>
-                    Lihat Semua Testimoni
-                </button>
-            </div>
+<!-- ═══════════════════════════════════════ FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+          <div style="width:36px;height:36px;background:linear-gradient(135deg,var(--p1),var(--p2));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;box-shadow:0 0 14px var(--glow);">🤫</div>
+          <span style="font-family:'Verdana',Geneva,sans-serif;font-size:1.2rem;font-weight:700;">Confessin</span>
         </div>
-    </section>
+        <p class="footer-brand-desc">Bot WhatsApp untuk kirim pesan anonim yang aman, cepat, dan mudah digunakan — langsung dari WhatsApp-mu.</p>
+        <a href="https://wa.me/628xxxxxxxxxx" class="footer-wa-btn">
+          <i class="fab fa-whatsapp"></i> Chat Bot Sekarang
+        </a>
+      </div>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-16">
-        <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-4 gap-8">
-                <!-- Logo & Description -->
-                <div class="md:col-span-2">
-                    <div class="flex items-center space-x-4 mb-6">
-                        <div class="w-12 h-12 bg-coral-red rounded-full flex items-center justify-center">
-                            <i class="fas fa-heart text-white text-lg"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-2xl font-bold">Confessin</h4>
-                            <p class="text-gray-400 text-sm">Platform Confess Terpercaya</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-300 leading-relaxed mb-6 max-w-md">
-                        Platform terpercaya untuk berbagi confess secara anonim. Ceritakan apa yang ada di hatimu dengan aman dan nyaman.
-                    </p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-coral-red transition-all clickable">
-                            <i class="fab fa-instagram text-white"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-coral-red transition-all clickable">
-                            <i class="fab fa-twitter text-white"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-coral-red transition-all clickable">
-                            <i class="fab fa-telegram text-white"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-coral-red transition-all clickable">
-                            <i class="fab fa-whatsapp text-white"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Quick Links -->
-                <div>
-                    <h5 class="text-xl font-bold mb-6">Quick Links</h5>
-                    <ul class="space-y-3">
-                        <li><a href="#statistics" class="text-gray-300 hover:text-white transition-all clickable">Statistik</a></li>
-                        <li><a href="#features" class="text-gray-300 hover:text-white transition-all clickable">Fitur</a></li>
-                        <li><a href="#documentation" class="text-gray-300 hover:text-white transition-all clickable">Panduan</a></li>
-                        <li><a href="#testimonials" class="text-gray-300 hover:text-white transition-all clickable">Testimoni</a></li>
-                    </ul>
-                </div>
-
-                <!-- Support -->
-                <div>
-                    <h5 class="text-xl font-bold mb-6">Support</h5>
-                    <ul class="space-y-3">
-                        <li><a href="#" class="text-gray-300 hover:text-white transition-all clickable">FAQ</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white transition-all clickable">Privacy Policy</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white transition-all clickable">Terms of Service</a></li>
-                        <li><a href="#" class="text-gray-300 hover:text-white transition-all clickable">Contact Us</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="border-t border-gray-800 pt-8 mt-8">
-                <div class="flex flex-col md:flex-row justify-between items-center">
-                    <p class="text-gray-400 text-sm mb-4 md:mb-0">
-                        © 2025 PT. Kreasi Digitalindo. Made with ❤️ for our amazing users
-                    </p>
-                    <div class="flex space-x-6 text-sm text-gray-400">
-                        <span>Server Status: <span class="text-green-400">Online</span></span>
-                        <span>Uptime: <span class="text-green-400">99.9%</span></span>
-                    </div>
-                </div>
-            </div>
+      <div>
+        <div class="footer-col-title">Navigasi</div>
+        <div class="footer-links">
+          <a href="#home">Beranda</a>
+          <a href="#about">Tentang</a>
+          <a href="#howto">Cara Pakai</a>
+          <a href="#testimoni">Testimoni</a>
+          <a href="#faq">FAQ</a>
         </div>
-    </footer>
+      </div>
 
-    <!-- JavaScript -->
-    <script>
-        // Global variables
-        let currentStatSlide = 0;
-        let isMobileMenuOpen = false;
+      <div>
+        <div class="footer-col-title">Fitur</div>
+        <div class="footer-links">
+          <a href="#">Kirim Anonim</a>
+          <a href="#">Pesan Terjadwal</a>
+          <a href="#">Mode Tebak Siapa</a>
+          <a href="#">Statistik Pesan</a>
+          <a href="#">Paket Premium</a>
+        </div>
+      </div>
 
-        // Mobile menu toggle
-        function toggleMobileMenu() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            const icon = document.getElementById('mobileMenuIcon');
-            
-            isMobileMenuOpen = !isMobileMenuOpen;
-            
-            if (isMobileMenuOpen) {
-                mobileMenu.classList.add('active');
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                mobileMenu.classList.remove('active');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
-        }
+      <div>
+        <div class="footer-col-title">Legal</div>
+        <div class="footer-links">
+          <a href="#">Syarat & Ketentuan</a>
+          <a href="#">Kebijakan Privasi</a>
+          <a href="#">Kebijakan Konten</a>
+          <a href="#">Hubungi Kami</a>
+        </div>
+      </div>
+    </div>
 
-        // Scroll functions
-        function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 Confessin. Dibuat dengan 💜 untuk para pemberani yang malu ngomong langsung.</p>
+      <div class="footer-socials">
+        <a href="#" class="footer-social-btn"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="footer-social-btn"><i class="fab fa-tiktok"></i></a>
+        <a href="#" class="footer-social-btn"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="footer-social-btn"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
 
-        function scrollToFeatures() {
-            const featuresSection = document.getElementById('features');
-            featuresSection.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
+<script>
+  // ─── Scroll animation ───
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.anim').forEach(el => obs.observe(el));
 
-        // Statistics counter animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.count-animation');
-            
-            counters.forEach(counter => {
-                const target = parseInt(counter.getAttribute('data-count'));
-                const increment = target / 100;
-                let current = 0;
-                
-                const timer = setInterval(() => {
-                    current += increment;
-                    if (current >= target) {
-                        counter.textContent = target.toLocaleString();
-                        clearInterval(timer);
-                    } else {
-                        counter.textContent = Math.ceil(current).toLocaleString();
-                    }
-                }, 20);
-            });
-        }
-
-        // Statistics Slider Functions
-        function nextStatSlide() {
-            const track = document.getElementById('statSliderTrack');
-            const indicators = document.querySelectorAll('.stat-indicator');
-            
-            indicators[currentStatSlide].classList.remove('bg-coral-red');
-            indicators[currentStatSlide].classList.add('bg-gray-300');
-            
-            currentStatSlide = (currentStatSlide + 1) % 3;
-            
-            indicators[currentStatSlide].classList.remove('bg-gray-300');
-            indicators[currentStatSlide].classList.add('bg-coral-red');
-            
-            track.style.transform = `translateX(-${currentStatSlide * 33.333}%)`;
-        }
-
-        function previousStatSlide() {
-            const track = document.getElementById('statSliderTrack');
-            const indicators = document.querySelectorAll('.stat-indicator');
-            
-            indicators[currentStatSlide].classList.remove('bg-coral-red');
-            indicators[currentStatSlide].classList.add('bg-gray-300');
-            
-            currentStatSlide = currentStatSlide === 0 ? 2 : currentStatSlide - 1;
-            
-            indicators[currentStatSlide].classList.remove('bg-gray-300');
-            indicators[currentStatSlide].classList.add('bg-coral-red');
-            
-            track.style.transform = `translateX(-${currentStatSlide * 33.333}%)`;
-        }
-
-        // Action functions
-        function startConfess() {
-            alert('Fitur ini akan mengarahkan ke halaman confess. Implementasi sesuai kebutuhan sistem Anda.');
-            // window.location.href = '/confess';
-        }
-
-        function viewAllTestimonials() {
-            alert('Fitur ini akan mengarahkan ke halaman testimoni lengkap. Implementasi sesuai kebutuhan sistem Anda.');
-            // window.location.href = '/testimonials';
-        }
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    // Account for fixed header height
-                    const headerHeight = 80;
-                    const targetPosition = target.offsetTop - headerHeight;
-                    
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile menu if open
-                    if (isMobileMenuOpen) {
-                        toggleMobileMenu();
-                    }
-                }
-            });
-        });
-
-        // Add click animations
-        document.querySelectorAll('.clickable').forEach(element => {
-            element.addEventListener('click', function() {
-                this.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    this.style.transform = '';
-                }, 150);
-            });
-        });
-
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    if (entry.target.id === 'statistics') {
-                        animateCounters();
-                    }
-                    entry.target.classList.add('fade-in-up');
-                }
-            });
-        }, observerOptions);
-
-        // Observe sections
-        document.querySelectorAll('section').forEach(section => {
-            observer.observe(section);
-        });
-
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add scroll event for header behavior
-            let lastScrollTop = 0;
-            let isScrolling = false;
-            
-            window.addEventListener('scroll', function() {
-                if (!isScrolling) {
-                    window.requestAnimationFrame(function() {
-                        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                        const header = document.querySelector('header');
-                        
-                        if (scrollTop > lastScrollTop && scrollTop > 100) {
-                            // Scrolling down
-                            header.classList.add('navbar-hidden');
-                        } else {
-                            // Scrolling up
-                            header.classList.remove('navbar-hidden');
-                        }
-                        lastScrollTop = scrollTop;
-                        isScrolling = false;
-                    });
-                    isScrolling = true;
-                }
-            });
-            
-            // Auto-advance statistics slider every 4 seconds (mobile only)
-            if (window.innerWidth < 768) {
-                setInterval(() => {
-                    nextStatSlide();
-                }, 4000);
-            }
-        });
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(event) {
-            const mobileMenu = document.getElementById('mobileMenu');
-            const mobileMenuBtn = event.target.closest('button[onclick="toggleMobileMenu()"]');
-            
-            if (isMobileMenuOpen && !mobileMenu.contains(event.target) && !mobileMenuBtn) {
-                toggleMobileMenu();
-            }
-        });
-
-        // Handle window resize
-        window.addEventListener('resize', function() {
-            if (window.innerWidth >= 768 && isMobileMenuOpen) {
-                toggleMobileMenu();
-            }
-        });
-    </script>
+  // ─── FAQ toggle ───
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+</script>
 </body>
 </html>
